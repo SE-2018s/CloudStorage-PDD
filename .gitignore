@@ -26,6 +26,8 @@
 ## Generated if empty string is given at "Please type another file name for output:"
 .pdf
 "ustcthesis\344\275\277\347\224\250\350\257\264\346\230\216.pdf"
+ustcthesis使用说明.pdf
+
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
 *.bcf
