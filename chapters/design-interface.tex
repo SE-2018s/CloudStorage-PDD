@@ -1,9 +1,292 @@
 \chapter{接口设计}
 \section{外部接口}
-比如说需要用到支付宝等外部支付系统，接口应当如何封装。
 
-\subsection{支付宝接口}
-详细讲述不同的接口（查询状态、支付交易、获取回执等）
+\subsection{HTTP接口}
+xyz云盘系统通过HTTP请求的方式实现API调用。
+
+\subsubsection{初始界面接口}
+URL：/api/index
+
+请求类型：GET
+
+参数：无参数
+ 
+返回值:返回初始页面
+
+\subsubsection{登录接口}
+URL：/api/login
+
+请求类型：POST
+
+参数：
+
+• username:用户名/邮箱
+
+• pass:密码经过密码学处理之后的字符串
+ 
+返回值:bool类型,表示是否成功,同时设置cookie
+
+\subsubsection{注册接口}
+URL：/api/register
+
+请求类型：POST
+
+参数：
+
+• username:用户名
+
+• email:邮箱
+
+• 密码:密码经过密码学处理之后得到的字符串
+
+返回值:bool类型,表示是否注册成功.
+
+\subsubsection{忘记密码接口}
+URL：/api/forget
+
+请求类型：POST
+
+参数：
+
+• username:用户名/邮箱
+
+返回值:不返回.如果用户存在,则服务器向该邮箱发送重设密码的链接.
+
+\subsubsection{登陆后接口}
+URL：/api/home
+
+请求类型：GET
+
+参数：
+
+• cookie,无需用户手动输入
+
+返回值:显示登陆后的页面。
+
+\subsubsection{上传接口}
+URL：/api/upload
+
+请求类型：POST
+
+参数：
+
+• path：文件的路径
+
+• cookie,无需用户手动输入
+
+返回值:bool类型，表示是否成功。
+
+\subsubsection{下载接口}
+URL：/api/download
+
+请求类型：GET
+
+参数：
+
+• path：文件路径
+
+• link:可选,可以直接下载链接(尤其是游客)
+
+• cookie：无需用户手动输入
+
+返回值:bool类型，表示是否成功。
+
+\subsubsection{重命名接口}
+URL：/api/rename
+
+请求类型：POST
+
+参数：
+
+• path：旧文件路径
+
+• path：新文件名
+
+• cookie：无需用户手动输入
+
+返回值:bool类型，表示是否成功。
+
+\subsubsection{粘贴接口}
+URL：/api/paste
+
+请求类型：POST
+
+参数：
+
+• path：旧文件路径
+
+• path：新文件路径
+
+• cookie：无需用户手动输入
+
+返回值:bool类型，表示是否成功。
+
+\subsubsection{新建文件夹接口}
+URL：/api/newDir
+
+请求类型：POST
+
+参数：
+
+• path:文件夹路径
+
+• cookie:无需用户手动输入
+
+返回值:bool类型，表示是否成功。
+
+\subsubsection{打开文件夹接口}
+URL：/api/openDir
+
+请求类型：GET
+
+参数：
+
+• path:文件夹路径
+
+• cookie:无需用户手动输入
+
+返回值:bool类型，表示是否成功。
+
+\subsubsection{返回上一级文件夹接口}
+URL：/api/openDir
+
+请求类型：GET
+
+参数：
+
+• path:文件夹路径
+
+• cookie:无需用户手动输入
+
+返回值:bool类型，表示是否成功。
+
+\subsubsection{排序显示接口}
+URL：/api/sort.do
+
+请求类型：GET
+
+参数：
+
+• path:文件夹路径
+
+• attribute:排序根据的属性
+
+• cookie:无需用户手动输入
+
+返回值:bool类型,表示是否成功。
+
+\subsubsection{移入移出回收站接口}
+URL：/api/garbage.do
+
+请求类型：POST
+
+参数：
+
+• path:文件路径
+
+• op:表示移入还是移出,还是彻底删除
+
+• cookie:无需用户手动输入
+
+返回值:bool类型,表示是否成功
+
+\subsubsection{移入移出收藏夹接口}
+URL：/api/collection
+
+请求类型：POST
+
+参数：
+
+• path:文件路径
+
+• op:表示移入还是移出收藏夹
+
+• cookie:无需用户手动输入
+
+返回值:bool类型,表示是否成功
+ 
+\subsubsection{登录接口}
+URL：/api/lookupattribute
+
+请求类型：GET
+
+参数：
+
+• path:文件路径
+
+• cookie:无需用户手动输入
+
+返回值:bool类型,表示是否成功
+
+\subsubsection{压缩/解压缩接口}
+URL：/api/zip
+
+请求类型：POST
+
+参数： 
+
+• path:文件路径
+
+• op:表示压缩还是解压缩
+
+• cookie:无需用户手动输入
+
+返回值:bool类型,表示是否成功
+
+\subsubsection{举报接口}
+URL：/api/report
+
+请求类型：POST
+
+参数： 
+
+• path:文件路径
+
+• cookie:无需用户手动输入
+
+返回值:bool类型,表示是否成功
+
+\subsubsection{搜索接口}
+URL：/api/search.do
+
+请求类型：POST
+
+参数： 
+
+• path:文件路径
+
+• cookie:无需用户手动输入
+
+返回值:bool类型,表示是否成功
+
+\subsubsection{生成分享链接接口}
+URL：/api/share.do
+
+请求类型：POST
+
+参数： 
+
+• path:文件路径
+
+• cookie:无需用户手动输入
+
+返回值:链接的地址
+
+\subsubsection{导入链接接口}
+URL：/api/getshare.do
+
+请求类型：POST
+
+参数： 
+
+• link:要导入的链接
+
+• path:文件夹
+
+• cookie:无需用户手动输入
+
+返回值:bool类型,表示是否成功
+
 
 \section{内部接口}
 
