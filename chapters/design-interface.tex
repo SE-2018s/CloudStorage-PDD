@@ -372,6 +372,11 @@ class shareInfo:
 参数ceph\_obj:ceph的一个block对象
 参数file\_obj:将要删除的该block里的文件
 
+\subsubsection{list(filepath)}
+参数：filepath：路径
+
+说明：将指定路径的文件列出来
+
 
 \subsection{MODULE.SERVER.9：回收站模块}
 
@@ -418,7 +423,17 @@ class shareInfo:
 说明：对传入的压缩文件就地解压
 
 \subsection{MODULE.SERVER.11：共享文件夹模块}
+\subsubsection{open(foldername, userID)}
+参数：foldername：共享文件夹名称
 
+参数：userID：用户ID
+
+说明：根据用户权限判断是否能否进入，若能则调用文件管理模块的接口
+
+\subsubsection{list(userID)}
+参数：userID：用户ID
+
+说明：返回所有该用户可见的共享文件夹列表
 
 
 
