@@ -338,3 +338,51 @@ class shareInfo:
 
 \subsection{MODULE.SERVER.6: 收藏夹模块}
 \subsubsection{create_bookmark(connection)}
+
+
+\subsection{MODULE.SERVER.9：回收站模块}
+
+\subsubsection{delete(userID, filepath)}
+参数 userID：执行删除操作的用户
+参数 filepath：要删除的文件路径
+
+说明：将该文件置为被删除状态，添加到该用户的回收站列表中
+
+\subsubsection{recover(userID, filepath)}
+参数 userID：执行恢复操作的用户
+参数 filepath：要恢复的文件路径
+
+说明：将该文件从该用户的回收站列表中移除，置为正常状态
+
+\subsubsection{list(userID)}
+参数 userID
+
+说明：列出该用户回收站中所有文件
+
+\subsubsection{clean(userID)}
+参数 userID：执行清空操作的用户
+
+说明：清空该用户的回收站列表
+
+\subsection{MODULE.SERVER.10：压缩模块}
+\subsubsection{compress(filelist, zipname, level, password)}
+
+参数：filelist：要压缩的所有文件、文件夹
+
+参数：zipname：压缩文件的命名（带路径）
+
+参数：level：压缩级别，从最快压缩速度到最高压缩率
+
+参数：password：要添加的压缩密码
+
+说明：对传入的文件列表创建一个压缩包
+
+\subsubsection{depress(zipname, password)}
+参数：zipname：压缩文件的名称（带路径）
+
+参数：password：解压密码，可选
+
+说明：对传入的压缩文件就地解压
+
+\subsection{MODULE.SERVER.11：共享文件夹模块}
+
