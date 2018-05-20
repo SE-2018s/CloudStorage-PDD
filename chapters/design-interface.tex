@@ -298,24 +298,31 @@ URL：/api/getshare.do
 
 \subsubsection{user\_login(connection,loginfo)}
 参数connection:浏览器和服务器间的连接
+
 参数loginfo：用户登录信息
+
 说明：用户登录账号
 class loginfo：
 String user\_name:用户名
 String password:密码
 \subsubsection{user\_register(connection, loginfo)}
 参数connection:浏览器和服务器间的连接
+
 参数loginfo：用户注册信息
+
 说明：用户注册账号
 \subsubsection{user\_find\_password(connection, user\_name, user\_email)}
 参数connection:浏览器和服务器间的连接
+
 参数user\_name:用户名
+
 参数user\_email:用户注册时的电子邮箱
 
 \subsection{MODULE.CLIENT.3: 标签页模块}
 
 \subsubsection{add\_tab(connection)}
 参数connection:浏览器和服务器间的连接
+
 参数tabinfo:已经打开的标签页信息
 \subsection{MODULE.CLIENT.4: 显示模块}
 
@@ -325,48 +332,82 @@ String password:密码
 \subsection{MODULE.CLIENT.5(SERVER.4)：传输模块}
 \subsubsection{upload(connection, file， filepath)}
 参数connection:浏览器和服务器间的连接
+
 参数file:要传输的文件
+
 参数filepath:云端文件路径
+
+说明:传输文件到服务器
 \subsubsection{download(connection, filepath)}
+
 参数connection:浏览器和服务器间的连接
+
 参数filepath:云端文件路径
 
+说明:传输文件到客户端
 \subsection{MODULE.SERVER.3：权限管理模块}
-\subsubsection{check\_right(operate, fielpath)}
-参数operate：操作
-参数filepath:云端文件路径
-返回：时候该权限合法
+\subsubsection{check\_right(filepath,userId}
+参数filepath::所要检查的文件路径.
 
+参数userId:用户名
+
+说明:检查用户名对该文件的权限
 
 \subsection{MODULE.SERVER.5: 分享管理模块}
 \subsubsection{create\_share(file\_path, fetch\_password, due\_time}
 参数file\_path：要分享的文件的\_path
+
 参数fetch\_password：下载该资源需要的密码
+
 参数due\_time:链接失效日期
+
+说明:生成分享链接
 
 \subsection{send\_share(shareInfog's)}
 class shareInfo:
+
     int owner\_path
+
     str link\_url
+
     str link\_passward
+
     time due\_time
 
 \subsection{MODULE.SERVER.6: 收藏夹模块}
-\subsubsection{create\_bookmark()}
 
 \subsubsection{add\_bookmark(bookmark\_path, file\_path)}
 参数file\_path：将要添加到收藏夹的文件
+
 参数bookmark\_path：收藏夹路径
 
+说明:移入收藏夹
 \subsection{delete\_bookmark(file\_path)}
 参数file\_path:要删除文件的路径
 
+说明:移出收藏夹
 \subsection{MODULE.SERVER.7: 文件管理模块}
 \subsubsection{insert\_file(file\_path, ceph\_obj)}
 参数file\_path:将要插入ceph模块的文件路径
+
 参数ceph\_obj:ceph的一个block对象
+
+说明:添加文件
 
 \subsubsection{drop\_file(ceph\_obj, file\_obj)}
 参数ceph\_obj:ceph的一个block对象
+
+说明:移入回收站
+
 参数file\_obj:将要删除的该block里的文件
- 
+\subsection{MODULE.SERVER.8: 审核模块}
+\subsubsection{report\_file(file\_path)}
+参数file\_path:用户所举报的文件路径
+
+说明:用户举报文件非法
+
+\subsubsection{check\_legality(file\_obj)}
+参数file\_obj:所要检查的文件路径.
+
+说明:检查文件是否非法
+
