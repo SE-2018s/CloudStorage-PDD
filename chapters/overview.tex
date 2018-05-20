@@ -1,78 +1,136 @@
 \chapter{任务概述}
-本系统的目标是实现一个xxx系统，包括客户端、服务器端两个部分。
+本系统的目标是实现一个xyz云盘系统，包括客户端、服务器端两个部分。
 
-客户端面向xxx用户，为用户提供xx和xx服务。
+客户端面向xyz云盘用户，为用户提供p2p下载、上传、分享、加密、在线解压缩等服务。
 
 \section{目标}
-实现xxx系统，实现需求规格说明书中所描述的xx功能、xxx功能和xxx功能，并且保证系统的健壮性和数据安全。
+实现xyz云盘系统，实现需求规格说明书中所描述的p2p下载、上传、分享、备份、加密、审核、在线解压缩和预览等功能，并且保证系统的健壮性、高可用性和数据安全。
 
 \section{开发与运行环境}
 
 \subsection{开发环境的配置}
+如表2.1开发环境的配置所示。
 \begin{table}[htbp]
 \centering
 \caption{开发环境的配置} \label{tab:development-environment}
 \begin{tabular}{|c|c|c|}
     \hline
     类别 & 标准配置 & 最低配置 \\
-    % \hline
-    % 计算机硬件 & \tabincell{c}{基于x86结构的CPU\\ 主频>=2.4GHz\\ 内存>=8G\\ 硬盘>=200G} & \tabincell{c}{基于x86结构的CPU\\ 主频>=1.6GHz\\ 内存>=512M\\ 硬盘>=2G} \\
-    % \hline
-    % 计算机软件 & \tabincell{c}{Linux (kernel version>=4.10)\\ GNU gcc (version>=6.3.1)} & \tabincell{c}{Linux (kernel version>=3.10)\\ GNU gcc (version>=5.4)} \\
-    % \hline
-    % 网络通信 & \tabincell{c}{至少要有一块可用网卡\\ 能运行IP协议栈即可} & \tabincell{c}{至少要有一块可用网卡\\ 能运行IP协议栈即可} \\
     \hline
-    其他 & 采用MySQL数据库 & 采用MySQL数据库 \\
+    计算机硬件 & 基于x86结构的CPU & 基于x86结构的CPU \\ 
+             & 内存>=8G & 内存>=4G \\
+             & 硬盘>=250G & 硬盘>= 100G \\
+             & 主频>=2.4GHz & 主频>=1.0GHz \\
+             & 网络带宽>=100MBps & 网络带宽>=10MBps \\ 
+    \hline
+    计算机软件 & 服务器端:CentOS (version>=7.4) & 服务器端:CentOS (version>=7.1)\\
+             & 客户端:Win10(version>=1709) & 客户端:Win10(version>=1703)\\
+    \hline
+    其他 & Java HotSpot VM 18.3 &  Java HotSpot VM 18.3\\
+        & Tomcat (version>=9) &  Tomcat (version>=9)\\ 
+        & Mysql(version>=5.7) &  Mysql(version>=5.6)\\
+        & Google Chrome(version>=61)等浏览器 &  Google Chrome(version>=61)等浏览器\\
+        & Ceph(version>=12.2) &  Ceph(version>=12.0)\\
     \hline
 \end{tabular}
 % \note{这里是表的注释}
 \end{table}
 
 \subsection{测试环境的配置}
+如表2.2测试环境的配置所示。
 \begin{table}[htbp]
 \centering
 \caption{测试环境的配置} \label{tab:test-environment}
 \begin{tabular}{|c|c|c|}
     \hline
     类别 & 标准配置 & 最低配置 \\
-    % \hline
-    % 计算机硬件 & \tabincell{c}{基于x86结构的CPU\\ 主频>=2.4GHz\\ 内存>=8G\\ 硬盘>=200G} & \tabincell{c}{基于x86结构的CPU\\ 主频>=1.6GHz\\ 内存>=512M\\ 硬盘>=2G} \\
-    % \hline
-    % 计算机软件 & \tabincell{c}{Linux (kernel version>=4.10)\\ GNU gcc (version>=6.3.1)} & \tabincell{c}{Linux (kernel version>=3.10)\\ GNU gcc (version>=5.4)} \\
-    % \hline
-    % 网络通信 & \tabincell{c}{至少要有一块可用网卡\\ 能运行IP协议栈即可} & \tabincell{c}{至少要有一块可用网卡\\ 能运行IP协议栈即可} \\
     \hline
-    其他 & 采用MySQL数据库 & 采用MySQL数据库 \\
+    计算机硬件 & 内存>=8G & 内存>=4G \\
+    (服务器端)         & 硬盘>=250G & 硬盘>= 100G \\
+             & 主频>=2.4GHz & 主频>=1.0GHz \\
+             & 网络带宽>=1GBps & 网络带宽>=10MBps \\ 
     \hline
+    计算机硬件 & 内存>=2G & 内存>=1G \\
+    (客户端)         & 硬盘剩余空间>=1G & 硬盘剩余空间>= 100M \\
+             & 主频>=2.4GHz & 主频>=1.0GHz \\
+             & 网络带宽>=100MBps & 网络带宽>=10MBps \\ 
+    \hline
+    计算机软件 & 服务器端:CentOS (version>=7.4) & 服务器端:CentOS (version>=7.1)\\
+             & 客户端:Win10(version>=1709) & 客户端:Win10(version>=1703)\\
+    \hline
+    其他 & Java HotSpot VM 18.3 &  Java HotSpot VM 18.3\\
+        & Tomcat (version>=9) &  Tomcat (version>=9)\\ 
+        & Mysql(version>=5.7) &  Mysql(version>=5.6)\\
+        & Google Chrome(version>=61)等浏览器 &  Google Chrome(version>=61)等浏览器\\
+        & Ceph(version>=12.2) &  Ceph(version>=12.0)\\
+    \hline 
 
 \end{tabular}
 % \note{这里是表的注释}
 \end{table}
 
 \subsection{运行环境的配置}
+如表2.3运行环境的配置所示。
 \begin{table}[htbp]
 \centering
 \caption{运行环境的配置} \label{tab:operation-environment}
 \begin{tabular}{|c|c|c|}
     \hline
     类别 & 标准配置 & 最低配置 \\
-    % \hline
-    % 计算机硬件 & \tabincell{c}{基于x86结构的CPU\\ 主频>=2.4GHz\\ 内存>=8G\\ 硬盘>=200G} & \tabincell{c}{基于x86结构的CPU\\ 主频>=1.6GHz\\ 内存>=512M\\ 硬盘>=2G} \\
-    % \hline
-    % 计算机软件 & \tabincell{c}{Linux (kernel version>=4.10)\\ GNU gcc (version>=6.3.1)} & \tabincell{c}{Linux (kernel version>=3.10)\\ GNU gcc (version>=5.4)} \\
-    % \hline
-    % 网络通信 & \tabincell{c}{至少要有一块可用网卡\\ 能运行IP协议栈即可} & \tabincell{c}{至少要有一块可用网卡\\ 能运行IP协议栈即可} \\
     \hline
-    其他 & 采用MySQL数据库 & 采用MySQL数据库 \\
+    计算机硬件 & 内存>=8G & 内存>=4G \\
+    (服务器端)         & 硬盘>=250G & 硬盘>= 100G \\
+             & 主频>=2.4GHz & 主频>=1.0GHz \\
+             & 网络带宽>=1GBps & 网络带宽>=10MBps \\ 
     \hline
-
+    计算机硬件 & 内存>=2G & 内存>=1G \\
+    (客户端)         & 硬盘剩余空间>=1G & 硬盘剩余空间>= 100M \\
+             & 主频>=2.4GHz & 主频>=1.0GHz \\
+             & 网络带宽>=100MBps & 网络带宽>=500KBps \\ 
+    \hline
+    计算机软件 & 服务器端:CentOS (version>=7.4) & 服务器端:CentOS (version>=7.1)\\
+             & 客户端:Win10(version>=1709) & 客户端:Win10(version>=1703)\\
+    \hline
+    其他 & Java HotSpot VM 18.3 &  Java HotSpot VM 18.3\\
+        & Tomcat (version>=9) &  Tomcat (version>=9)\\ 
+        & Mysql(version>=5.7) &  Mysql(version>=5.6)\\
+        & Google Chrome(version>=61)等浏览器&  Google Chrome(version>=61)等浏览器\\
+        & Ceph(version>=12.2) &  Ceph(version>=12.0)\\
+    \hline
 \end{tabular}
 % \note{这里是表的注释}
 \end{table}
 
 \section{需求概述}
-功能需求包括：
+功能需求包括： 
 
+用户的注册、登陆、退出、忘记密码。
+
+文件的上传、下载、重命名、移动、加密、分享、搜索、在线解压缩、审核、共享文件夹等。
 
 \section{条件与限制}
-本节至少要与需求说明文档中相关章节相一致。
+为了完成这个项目，xyz云盘系统的的开发应该在以下条件下展开：
+
+• 开发者掌握足够的开发xyz云盘系统的能力，比如前后端代码编写的能力、UI设计的能力、与客户进行有效沟通的能力等。
+
+• 开发者掌握足够的需要开发xyz云盘系统的软硬件环境配置，尤其是开发过程中的软硬件资源、以及运行时的足够的服务器资源。
+ 
+• 开发者有足够的精力与时间进行xyz云盘系统的开发。
+
+• 开发者能够负责后续的项目更新、bug修复等事宜。
+
+同时，xyz云盘系统的开发具有如下的限制因素：
+
+• 硬件资源：开发者没有足够的经费以维持足够的服务器硬件开销，尤其是庞大的硬盘开销以及网络带宽开销。
+
+• 开发经验：开发者没有足够的相关应用的开发经验。
+
+• 人力资源：没有足够的人员数量以及开发的时间精力。
+
+• 用户隐私：xyz云盘系统为了在中国能够合法的运营下去，必须遵守中国的相关法律规定，包括存储必要的用户数据以允许相关部门的合法审查，而这必然会限制用户隐私的绝对保护。
+
+• 安全性依赖：xyz云盘系统依赖于Windows、Java、CentOS、Mysql、Ceph、Tomcat、Chrome等多个第三方开源产品，所以其安全性受到这些第三方产品的限制。
+
+• 性能依赖：xyz云盘系统由于是网盘软件，所以其下载、上传等功能会极大地受到用户自身硬件资源等的限制，所以性能与用户硬件的相关性极大。
+
+• 浏览器依赖：xyz云盘系统的客户端部署在用户的浏览器中，所以根据浏览器对Http、Https等协议的实现不同，其兼容性可能也会有些许偏差。
