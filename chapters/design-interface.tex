@@ -87,72 +87,175 @@ URL：/api/download
 
 • cookie：无需用户手动输入
 
-返回值:
+返回值:bool类型，表示是否成功。
 
-\subsubsection{登录接口}
-URL：/api/
-
-请求类型：POST
-
-参数：
-
-• 
-
-• 
-
-返回值:
-
-\subsubsection{登录接口}
-URL：/api/
+\subsubsection{重命名接口}
+URL：/api/rename
 
 请求类型：POST
 
 参数：
 
-• 
+• path：旧文件路径
 
-• 
+• path：新文件名
 
-返回值:
+• cookie：无需用户手动输入
 
-\subsubsection{登录接口}
-URL：/api/
+返回值:bool类型，表示是否成功。
 
-请求类型：POST
-
-参数：
-
-• 
-
-• 
-
-返回值:
-
-\subsubsection{登录接口}
-URL：/api/
+\subsubsection{粘贴接口}
+URL：/api/paste
 
 请求类型：POST
 
 参数：
 
-• 
+• path：旧文件路径
 
-• 
+• path：新文件路径
 
-返回值:
+• cookie：无需用户手动输入
 
+返回值:bool类型，表示是否成功。
+
+\subsubsection{新建文件夹接口}
+URL：/api/newDir
+
+请求类型：POST
+
+参数：
+
+• path:文件夹路径
+
+• cookie:无需用户手动输入
+
+返回值:bool类型，表示是否成功。
+
+\subsubsection{打开文件夹接口}
+URL：/api/openDir
+
+请求类型：GET
+
+参数：
+
+• path:文件夹路径
+
+• cookie:无需用户手动输入
+
+返回值:bool类型，表示是否成功。
+
+\subsubsection{返回上一级文件夹接口}
+URL：/api/openDir
+
+请求类型：GET
+
+参数：
+
+• path:文件夹路径
+
+• cookie:无需用户手动输入
+
+返回值:bool类型，表示是否成功。
+
+\subsubsection{排序显示接口}
+URL：/api/sort.do
+
+请求类型：GET
+
+参数：
+
+• path:文件夹路径
+
+• attribute:排序根据的属性
+
+• cookie:无需用户手动输入
+
+返回值:bool类型,表示是否成功。
+
+\subsubsection{移入移出回收站接口}
+URL：/api/garbage.do
+
+请求类型：POST
+
+参数：
+
+• path:文件路径
+
+• op:表示移入还是移出,还是彻底删除
+
+• cookie:无需用户手动输入
+
+返回值:bool类型,表示是否成功
+
+\subsubsection{移入移出收藏夹接口}
+URL：/api/collection
+
+请求类型：POST
+
+参数：
+
+• path:文件路径
+
+• op:表示移入还是移出收藏夹
+
+• cookie:无需用户手动输入
+
+返回值:bool类型,表示是否成功
+ 
 \subsubsection{登录接口}
-URL：/api/
+URL：/api/lookupattribute
+
+请求类型：GET
+
+参数：
+
+• path:文件路径
+
+• cookie:无需用户手动输入
+
+返回值:bool类型,表示是否成功
+
+\subsubsection{压缩/解压缩接口}
+URL：/api/zip
 
 请求类型：POST
 
 参数： 
 
-• 
+• path:文件路径
 
-• 
+• op:表示压缩还是解压缩
 
-返回值:
+• cookie:无需用户手动输入
+
+返回值:bool类型,表示是否成功
+
+\subsubsection{举报接口}
+URL：/api/report
+
+请求类型：POST
+
+参数： 
+
+• path:文件路径
+
+• cookie:无需用户手动输入
+
+返回值:bool类型,表示是否成功
+
+\subsubsection{搜索接口}
+URL：/api/search.do
+
+请求类型：POST
+
+参数： 
+
+• path:文件路径
+
+• cookie:无需用户手动输入
+
+返回值:bool类型,表示是否成功
 
 \section{内部接口}
 内部模块/系统之间的交互的接口。
