@@ -85,6 +85,8 @@ URL：/api/download
 
 • path：文件路径
 
+• link:可选,可以直接下载链接(尤其是游客)
+
 • cookie：无需用户手动输入
 
 返回值:bool类型，表示是否成功。
@@ -256,6 +258,35 @@ URL：/api/search.do
 • cookie:无需用户手动输入
 
 返回值:bool类型,表示是否成功
+
+\subsubsection{生成分享链接接口}
+URL：/api/share.do
+
+请求类型：POST
+
+参数： 
+
+• path:文件路径
+
+• cookie:无需用户手动输入
+
+返回值:链接的地址
+
+\subsubsection{导入链接接口}
+URL：/api/getshare.do
+
+请求类型：POST
+
+参数： 
+
+• link:要导入的链接
+
+• path:文件夹
+
+• cookie:无需用户手动输入
+
+返回值:bool类型,表示是否成功
+
 
 \section{内部接口}
 内部模块/系统之间的交互的接口。
