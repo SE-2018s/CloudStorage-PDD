@@ -2,7 +2,7 @@
 \section{软件描述}
 系统包括前台和后台两个部分。
 
-前台主要功能是：初始化界面的显示、用户的登录相关操作的请求（如输入用户名密码等）、用户的文件相关操作的请求（如选中文件并上传、下载、分享等操作）的控制信息的发送以及数据文件的发送、用户操作的结果显示等。
+前台主要功能是：初始化界面的显示、关操作的请求（如输入用户名密码等）、用户的文件相关操作的请求（如选中文件并上传、下载、分享等操作）的控制信息的发送以及数据文件的发送、用户操作的结果显示等。
 
 后台主要功能是：处理用户的输入，判断其权限、其操作是否合法；对于相应的文件操作，进行相应的判断与处理，比如：对于上传以及分享的文件，进行内容审核处理；对文件进行存储冗余处理；并且将处理结果(包括操作的结果以及下载操作对应的数据文件的发送等)返回到客户端。
 
@@ -254,40 +254,387 @@
 
 该标签页被关闭，从标签栏中消失。 
 
+\subsection{功能20-创建共享文件夹的具体流程}
+
+用户点击“创建共享文件夹”按钮，输入想要创建的共享文件夹的名称，选择想要对其可见的用户列表，并对其分配权限：管理，读，写
+
+用户点击创建并输入文件夹名后，客户端将相关指令信息打包发送给服务端
+
+服务端在专门设置的放置共享文件夹的位置创建该文件夹。若创建失败，则返回错误信息。若创建成功，则根据用户设置的权限对文件夹的属性进行修改。
+
+客户端收到创建成功或失败，显示提示信息。
+
+\subsection{功能21-进入共享文件夹的具体流程}
+
+用户点击共享文件夹按钮，客户端将此命令打包发送到服务器。
+                                                                             
+服务器传回所有对用户可见的共享文件夹（看起来就像此时进入了一个文件夹一样）。
+
+用户点击想要进入的共享文件夹，客户端将指令打包发送到服务器
+
+服务器传回该共享文件夹内的所有对该用户的可见文件，从而进入了该文件夹。之后的操作与普通文件夹一样，但多了一个额外限制：只返回对改用户可见的文件。
+
+用户选择进入一个共享文件夹，之后对其的操作与普通文件夹一样
+
+\subsection{功能22-共享文件夹的权限匹配的具体流程}
+
+用户对共享文件夹/其中的文件夹、文件进行像普通文件（夹）一样的操作：修改权限，创建文件夹、文件，下载，上传，重命名，删除，移动，复制粘贴，预览
+
+客户端的行为与普通文件夹下的行为一致，但在服务端需要判断用户的权限是否允许客户进行该操作：
+
+用户需要有该文件的读权限：
+
+1. 下载
+
+2. 复制、移动到用户个人网盘
+
+3. 预览
+
+用户需要有该文件的写权限：
+
+1. 删除
+
+2. 重命名
+
+3. 移动
+
+4. 上传对其进行覆盖
+
+5. 删除的文件夹内包含这个文件
+
+用户需要拥有该文件夹的读权限：
+
+1. 进入该文件夹
+
+2. 下载该文件夹
+
+3. 复制、移动到用户个人网盘
+
+4. 预览
+
+用户需要有该文件夹的写权限：
+
+1. 向其中上传文件（夹）
+
+2. 在其中删除文件（夹）
+
+3. 重命名该文件夹
+
+4. 移动该文件夹
+
+5. 上传文件夹对其进行合并
+
+6. 删除该文件夹
+
+7. 删除该文件夹所属的文件夹
+
+用户需要有该共享文件夹的管理权限：
+
+1. 修改其内文件、文件夹的权限分配
+
+2. 移除该共享文件夹
+
+若服务端发现用户指令与其权限不匹配，返回权限不匹配的信息，否则正常进行操作并返回正常操作的返回信息
+
+\subsection{功能23-共享文件夹的权限管理的具体流程}
+
+用户对共享文件夹中的文件夹/文件或共享文件夹本身点击管理按钮，选择指定的用户并修改其对应的各个权限，点击确认
+
+点击确认按钮后，客户端将指令打包发给服务端
+
+服务端判断用户是否有管理权，若有则修改指令中的对应权限，并提示修改成功，否则，返回没有权限的错误信息
+
+客户端根据返回信息提示修改是否成功
+
+
+
 \section{功能结构设计}
 \subsection{整体结构}
-此处应当有一个图和对应的描述。系统如果像微内核那样，划分成核心模块和若干个子系统，此处应当有图示及说明，然后后续几个节应当描述这几个子系统。如果系统像宏内核，那应当说明有哪些紧密联系的模块，并在后续几个节内描述这些模块。
+整体模块的结构如图3.5所示。整体结构由客户端的4个内部模块、1个外部模块，和服务器端的11个内部模块、1个外部模块组成。
+
+\begin{figure}[!ht] 
+\centering 
+\includegraphics[width=18cm]{module_overall.png} 
+\caption{整体结构模块图}\label{fig:noted-figure}
+\end{figure}
 
 \subsection{用户端结构}
-此处应当有一个图和对应的描述。这只是举个例子。可能的内容包括用户端的具体模块、耦合情况等。
+用户端的模块结构如图3.6所示，
+分成负责用户登录、注册、忘记密码的登陆模块，
+负责标签页的创建与关闭操作的标签页模块，
+负责生成页面，显示内容，弹出错误提示信息的显示模块，
+负责上传文件、下载文件的传输模块，
+以及与这些模块通信、与服务器端模块通信的通信模块一共5个模块构成。
+\begin{figure}[!h]  
+\centering 
+\includegraphics[width=8cm]{module_client.png} 
+\caption{用户端模块结构图}\label{fig:noted-figure}
+\end{figure}
+
+\subsubsection{MODULE.CLIENT.1:通信模块}
+将其他模块产生的输入打包为http请求，向服务器端发送，并将返回的内容传给该模块
+
+\subsubsection{MODULE.CLIENT.2:登陆模块}
+产生登陆页面。
+
+若用户登陆，检查其用户名与密码合法性，将用户名与密码散列值传给通信模块，并解析返回的结果
+
+若用户注册，则检查用户信息的合法性，并将其打包传给通信模块，解析返回的结果
+
+若用户忘记密码，则检查用户信息的合法性，打包传给通信模块，解析传回的结果
+
+\subsubsection{MODULE.CLIENT.3:标签页模块}
+管理用户同时打开的多个标签页，对每个标签页有一个子页面。
+
+将用户对标签的操作打包传给通信模块，解析传回的结果
+
+\subsubsection{MODULE.CLIENT.4:显示模块}
+绘制页面内容，包括文件列表、功能按钮、
+
+\subsubsection{MODULE.CLIENT.5:传输模块}
+t
+
+
+
+
 
 \subsection{服务器端结构}
-此处应当有一个图和对应的描述。这只是举个例子。
+服务器端的模块结构如图3.6所示，
+分成负责用户信息管理、密码验证、发送电子邮件等操作的用户信息数据库模块，
+负责权限管理、文件加密的权限模块，
+负责上传文件、下载文件的文件传输模块，
+负责生成分享链接、导入分享链接的分享管理模块，
+负责移入收藏夹、移出收藏夹的收藏夹模块，
+负责文件元数据管理（如存储冗余、搜索、分类、新建、移动等）的元数据管理模块，
+负责举办和审核的审核模块,
+负责移入回收站、移出回收站、彻底删除的回收站模块，
+负责压缩、解压缩的压缩模块，
+负责共享文件夹操作的共享文件夹模块，
+负责版本更新的版本管理模块，
+以及负责与这些模块通信，
+与客户端模块通信的通信模块，一共12个模块。
 
-\subsection{后台数据库维护模块结构}
-此处应当有一个图和对应的描述。这只是举个例子。
+\begin{figure}[!h] 
+\centering   
+\includegraphics[width=16cm]{module_server.png}
+\caption{服务器端模块结构图}\label{fig:noted-figure}
+\end{figure}
+
+\subsubsection{MODULE.SERVER.1:通信模块}
+t
+
+\subsubsection{MODULE.SERVER.2:用户信息数据库模块}
+t
+
+\subsubsection{MODULE.SERVER.3:权限模块}
+t
+
+\subsubsection{MODULE.SERVER.4:文件传输模块}
+t
+
+\subsubsection{MODULE.SERVER.5:分享管理模块}
+t
+
+\subsubsection{MODULE.SERVER.6:收藏夹模块}
+t
+
+\subsubsection{MODULE.SERVER.7:元数据管理模块}
+t
+
+\subsubsection{MODULE.SERVER.8:审核模块} 
+t
+
+\subsubsection{MODULE.SERVER.9:回收站模块}
+t 
+
+\subsubsection{MODULE.SERVER.10:压缩模块}
+t
+
+\subsubsection{MODULE.SERVER.11:共享文件夹模块}
+t
+
+\subsubsection{MODULE.SERVER.12:版本管理模块}
+t
+
+
+
 
 
 
 \section{功能需求与程序代码的关系}
-[此处指的是不同的需求分配到哪些模块去实现。可按不同的端拆分此表]
-\begin{table}[htbp]
+这一小节分为功能需求与用户端代码的关系和功能需求与服务器端代码的关系两个部分。其中，与用户端代码的关系如表3.1，表3.2所示；与服务器端的代码的关系如表3.3，表3.4所示。
+\begin{table}[!ht]
 \centering
-\caption{功能需求与程序代码的关系表} \label{tab:requirement-module}
-\begin{tabular}{|c|c|c|c|}
+\caption{功能需求与程序代码的关系表1-用户端模块第1部分} \label{tab:requirement-module}
+\begin{tabular}{|c|c|c|c|c|c|}
+    \hline 
+    需求ID & MD.CL.1 & MD.CL.2 & MD.CL.3 & MD.CL.4 & MD.CL.5 \\
+    \hline 
+    R..USER.LOGIN.001 &· &· &· & Y  &· \\
     \hline
-    · & 模块1 & 模块2 & 模块3 \\
+    R..USER.LOGIN.002 & Y & Y &Y  &·  &· \\
+    \hline 
+    R..USER.LOGIN.003 & Y & Y & Y &·  &· \\
     \hline
-    需求1 & · & Y & · \\
+    R..USER.LOGIN.004 & Y & Y & Y &·   &· \\
     \hline
-    需求2 & · & Y & · \\
+    R..USER.LOGIN.005 &· &· &· & Y  &· \\
     \hline
-    需求3 & · & Y & · \\
+    R..FILE.BASIC.001 & Y &· &· & Y  & Y \\
     \hline
-    需求4 & Y & · & · \\
+    R..FILE.BASIC.002 & Y &· &· &  Y & Y \\
+    \hline 
+    R..FILE.BASIC.003 & Y  &·  & · &Y   &· \\
     \hline
-    需求5 & · & · & Y \\
+    R..FILE.BASIC.004 & Y  &·  & · &Y  &· \\
+    \hline
+    R..FILE.BASIC.005 & Y  &·  & · &Y  &· \\
+    \hline
+    R..FILE.BASIC.006 & Y  &·  & · & Y  &· \\ 
+    \hline
+    R..FILE.BASIC.007 & Y  &·  & · & Y  &· \\
+    \hline
+    R..FILE.BASIC.008 & Y  &·  & · & Y  &· \\
+    \hline
+    R..FILE.BASIC.009 & Y  &·  & · & Y  &· \\ 
+    \hline
+    R..FILE.BASIC.010 &·  & · & Y & Y  &· \\ 
+    \hline
+    R..FILE.HIGH.001 & Y  &·  & · &Y  &· \\
+    \hline
+    R..FILE.HIGH.002 & Y  &·  & · & Y  &· \\
+    \hline
+    R..FILE.HIGH.003 & Y &· &· & Y  &· \\
+    \hline
+    R..FILE.HIGH.004 & Y &· &· &Y  &· \\
+    \hline
+    R..FILE.HIGH.005 & Y &· &· & Y  &· \\
     \hline
 \end{tabular}
-\note{各项功能需求的实现与各个程序模块的分配关系}
+\note{表中的R..XXX等均指R.XYZ.CLOUDSTORAGE.XXX。   MD.CL指MODULE.CLIENT}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption{功能需求与程序代码的关系表1-用户端模块第2部分} \label{tab:requirement-module}
+\begin{tabular}{|c|c|c|c|c|c|}
+    \hline 
+    需求ID & MD.CL.1 & MD.CL.2 & MD.CL.3 & MD.CL.4 & MD.CL.5 \\
+    \hline 
+    R..FILE.HIGH.006 &Y  &· &· &   Y& ·\\
+    \hline
+    R..FILE.HIGH.007 &Y  &·  &·  &  Y& ·\\
+    \hline 
+    R..FILE.HIGH.008 &Y  &·  &·  &  Y& ·\\
+    \hline
+    R..FILE.HIGH.009 &Y  &·  &·  &   Y& ·\\
+    \hline
+    R..FILE.HIGH.010 &Y &· &· &   Y& ·\\
+    \hline
+    R..FILE.HIGH.011 &Y  &· &· &   Y&  ·\\
+    \hline
+    R..TAB.001 &·  &· &Y &   Y&  ·\\
+    \hline 
+    R..TAB.002 &·   &Y  &·  &   Y& ·\\
+    \hline
+    R..SHAREFOLDER.001 &  Y &·  &·  &  Y& ·\\
+    \hline
+    R..SHAREFOLDER.002 &  Y &·  &·  &  Y& ·\\
+    \hline
+    R..SHAREFOLDER.003 &  Y &·  &·  &   Y& ·\\ 
+    \hline
+    R..SHAREFOLDER.004 &  Y &·  &·  &   Y& ·\\
+    \hline
+    R..VERSION.001 &  Y &·  &·  &   Y& ·\\
+    \hline
+\end{tabular}
+\note{表中的R..XXX等均指R.XYZ.CLOUDSTORAGE.XXX。   MD.CL指MODULE.CLIENT}
+\end{table}
+ 
+\begin{table}[!ht]
+\centering
+\caption{功能需求与程序代码的关系表2-服务器端模块第1部分} \label{tab:requirement-module}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline 
+    需求ID & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\    
+    \hline 
+    R..USER.LOGIN.001 &· &· &· &· &· &· &· &· &· &· &· &Y \\
+    \hline
+    R..USER.LOGIN.002 &Y&Y&· &· &· &· &· &· &· &· &· &  ·\\
+    \hline 
+    R..USER.LOGIN.003 &Y&Y&· &· &· &· &· &· &· &· &· &  ·\\
+    \hline
+    R..USER.LOGIN.004 &Y&Y&· &· &· &· &· &· &· &· &· &  ·\\
+    \hline
+    R..USER.LOGIN.005 &· &· &· &· &· &· &· &· &· &· &· &  ·\\
+    \hline
+    R..FILE.BASIC.001 &Y&· &Y&Y&· &· &Y&Y&· &· &· &  ·\\
+    \hline
+    R..FILE.BASIC.002 &Y&· &Y&Y&· &· &Y&Y&· &· &· &  ·\\
+    \hline 
+    R..FILE.BASIC.003 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\
+    \hline
+    R..FILE.BASIC.004 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\
+    \hline
+    R..FILE.BASIC.005 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\
+    \hline
+    R..FILE.BASIC.006 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\ 
+    \hline
+    R..FILE.BASIC.007 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\
+    \hline
+    R..FILE.BASIC.008 &Y&· &Y&· &· &· &Y&· &· &Y&· &  ·\\
+    \hline
+    R..FILE.BASIC.009 &Y&· &Y&· &· &· &Y&· &· &Y&· &  ·\\ 
+    \hline
+    R..FILE.BASIC.010 &· &· &· &· &· &· &· &· &· &· &· &  ·\\ 
+    \hline
+    R..FILE.HIGH.001 &Y&· &Y&· &· &· &Y&· &Y&· &· &  ·\\
+    \hline
+    R..FILE.HIGH.002 &Y&· &Y&· &· &Y&Y&· &· &· &· &  ·\\
+    \hline
+    R..FILE.HIGH.003 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\
+    \hline
+    R..FILE.HIGH.004 &Y&· &Y&· &Y&· &Y&Y&· &· &· &  ·\\
+    \hline
+    R..FILE.HIGH.005 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\
+    \hline
+\end{tabular}
+\note{表中的R..XXX等均指R.XYZ.CLOUDSTORAGE.XXX。第一行的1~12表示指MODULE.SERVER.1~12}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption{功能需求与程序代码的关系表2-服务器端模块第2部分} \label{tab:requirement-module}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline 
+    需求ID & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\    
+    \hline 
+    R..FILE.HIGH.006 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\
+    \hline
+    R..FILE.HIGH.007 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\
+    \hline 
+    R..FILE.HIGH.008 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\
+    \hline
+    R..FILE.HIGH.009 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\
+    \hline
+    R..FILE.HIGH.010 &Y&· &Y&· &· &· &Y&Y&· &· &· &  ·\\
+    \hline
+    R..FILE.HIGH.011 &Y&· &Y&· &· &· &Y&Y&· &· &· &  ·\\
+    \hline
+    R..TAB.001 &· &· &· &· &· &· &· &· &· &· &· &  ·\\
+    \hline 
+    R..TAB.002 &· &· &· &· &· &· &· &· &· &· &· &  ·\\
+    \hline
+    R..SHAREFOLDER.001 &Y&· &Y&· &· &· &Y&· &· &· &Y&  ·\\
+    \hline
+    R..SHAREFOLDER.002 &Y&· &Y&· &· &· &Y&· &· &· &Y&  ·\\
+    \hline
+    R..SHAREFOLDER.003 &Y&· &Y&· &· &· &Y&· &· &· &Y&  ·\\ 
+    \hline
+    R..SHAREFOLDER.004 &Y&· &Y&· &· &· &Y&· &· &· &Y&  ·\\ 
+    \hline
+    R..VERSION.001 &Y&· &· &· &· &· &· &· &· &· &· &Y \\
+    \hline
+\end{tabular}
+\note{表中的R..XXX等均指R.XYZ.CLOUDSTORAGE.XXX。第一行的1~12表示指MODULE.SERVER.1~12}
 \end{table}
