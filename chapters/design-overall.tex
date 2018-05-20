@@ -459,11 +459,11 @@
 \subsubsection{MODULE.SERVER.10:压缩模块}
 对传入的文件（夹）列表进行压缩操作，生成的压缩包根据传入的文件名与位置写回文件系统
 
+还可以对传入的压缩包进行在线解压
+
 \subsubsection{MODULE.SERVER.11:共享文件夹模块}
 管理所有共享文件夹。对共享文件夹的操作先由本模块调用权限模块判断权限，然后调用文件管理模块进行正常的文件操作
 
-\subsubsection{MODULE.SERVER.12:版本管理模块}
-管理该最新版本所需的，用户端的最低配置。若用户端使用的浏览器等应用版本过低，则禁止其进行进一步操作并提示需要更新
 
 
 
@@ -565,47 +565,47 @@
 \caption{功能需求与程序代码的关系表2-服务器端模块第1部分} \label{tab:requirement-module}
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
     \hline 
-    需求ID & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\    
+    需求ID & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 \\    
     \hline 
-    R..USER.LOGIN.001 &· &· &· &· &· &· &· &· &· &· &· &Y \\
+    R..USER.LOGIN.001 &· &· &· &· &· &· &· &· &· &· &· \\
     \hline
-    R..USER.LOGIN.002 &Y&Y&· &· &· &· &· &· &· &· &· &  ·\\
+    R..USER.LOGIN.002 &Y&Y&· &· &· &· &· &· &· &· &· \\
     \hline 
-    R..USER.LOGIN.003 &Y&Y&· &· &· &· &· &· &· &· &· &  ·\\
+    R..USER.LOGIN.003 &Y&Y&· &· &· &· &· &· &· &· &· \\
     \hline
-    R..USER.LOGIN.004 &Y&Y&· &· &· &· &· &· &· &· &· &  ·\\
+    R..USER.LOGIN.004 &Y&Y&· &· &· &· &· &· &· &· &· \\
     \hline
-    R..USER.LOGIN.005 &· &· &· &· &· &· &· &· &· &· &· &  ·\\
+    R..USER.LOGIN.005 &· &· &· &· &· &· &· &· &· &· &· \\
     \hline
-    R..FILE.BASIC.001 &Y&· &Y&Y&· &· &Y&Y&· &· &· &  ·\\
+    R..FILE.BASIC.001 &Y&· &Y&Y&· &· &Y&Y&· &· &· \\
     \hline
-    R..FILE.BASIC.002 &Y&· &Y&Y&· &· &Y&Y&· &· &· &  ·\\
+    R..FILE.BASIC.002 &Y&· &Y&Y&· &· &Y&Y&· &· &· \\
     \hline 
-    R..FILE.BASIC.003 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\
+    R..FILE.BASIC.003 &Y&· &Y&· &· &· &Y&· &· &· &· \\
     \hline
-    R..FILE.BASIC.004 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\
+    R..FILE.BASIC.004 &Y&· &Y&· &· &· &Y&· &· &· &· \\
     \hline
-    R..FILE.BASIC.005 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\
+    R..FILE.BASIC.005 &Y&· &Y&· &· &· &Y&· &· &· &· \\
     \hline
-    R..FILE.BASIC.006 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\ 
+    R..FILE.BASIC.006 &Y&· &Y&· &· &· &Y&· &· &· &· \\ 
     \hline
-    R..FILE.BASIC.007 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\
+    R..FILE.BASIC.007 &Y&· &Y&· &· &· &Y&· &· &· &· \\
     \hline
-    R..FILE.BASIC.008 &Y&· &Y&· &· &· &Y&· &· &Y&· &  ·\\
+    R..FILE.BASIC.008 &Y&· &Y&· &· &· &Y&· &· &Y&· \\
     \hline
-    R..FILE.BASIC.009 &Y&· &Y&· &· &· &Y&· &· &Y&· &  ·\\ 
+    R..FILE.BASIC.009 &Y&· &Y&· &· &· &Y&· &· &Y&· \\ 
     \hline
-    R..FILE.BASIC.010 &· &· &· &· &· &· &· &· &· &· &· &  ·\\ 
+    R..FILE.BASIC.010 &· &· &· &· &· &· &· &· &· &· &· \\ 
     \hline
-    R..FILE.HIGH.001 &Y&· &Y&· &· &· &Y&· &Y&· &· &  ·\\
+    R..FILE.HIGH.001 &Y&· &Y&· &· &· &Y&· &Y&· &· \\
     \hline
-    R..FILE.HIGH.002 &Y&· &Y&· &· &Y&Y&· &· &· &· &  ·\\
+    R..FILE.HIGH.002 &Y&· &Y&· &· &Y&Y&· &· &· &· \\
     \hline
-    R..FILE.HIGH.003 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\
+    R..FILE.HIGH.003 &Y&· &Y&· &· &· &Y&· &· &· &· \\
     \hline
-    R..FILE.HIGH.004 &Y&· &Y&· &Y&· &Y&Y&· &· &· &  ·\\
+    R..FILE.HIGH.004 &Y&· &Y&· &Y&· &Y&Y&· &· &· \\
     \hline
-    R..FILE.HIGH.005 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\
+    R..FILE.HIGH.005 &Y&· &Y&· &· &· &Y&· &· &· &· \\
     \hline
 \end{tabular}
 \note{表中的R..XXX等均指R.XYZ.CLOUDSTORAGE.XXX。第一行的1~12表示指MODULE.SERVER.1~12}
@@ -616,33 +616,33 @@
 \caption{功能需求与程序代码的关系表2-服务器端模块第2部分} \label{tab:requirement-module}
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
     \hline 
-    需求ID & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\    
+    需求ID & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 \\    
     \hline 
-    R..FILE.HIGH.006 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\
+    R..FILE.HIGH.006 &Y&· &Y&· &· &· &Y&· &· &· &· \\
     \hline
-    R..FILE.HIGH.007 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\
+    R..FILE.HIGH.007 &Y&· &Y&· &· &· &Y&· &· &· &· \\
     \hline 
-    R..FILE.HIGH.008 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\
+    R..FILE.HIGH.008 &Y&· &Y&· &· &· &Y&· &· &· &· \\
     \hline
-    R..FILE.HIGH.009 &Y&· &Y&· &· &· &Y&· &· &· &· &  ·\\
+    R..FILE.HIGH.009 &Y&· &Y&· &· &· &Y&· &· &· &· \\
     \hline
-    R..FILE.HIGH.010 &Y&· &Y&· &· &· &Y&Y&· &· &· &  ·\\
+    R..FILE.HIGH.010 &Y&· &Y&· &· &· &Y&Y&· &· &· \\
     \hline
-    R..FILE.HIGH.011 &Y&· &Y&· &· &· &Y&Y&· &· &· &  ·\\
+    R..FILE.HIGH.011 &Y&· &Y&· &· &· &Y&Y&· &· &· \\
     \hline
-    R..TAB.001 &· &· &· &· &· &· &· &· &· &· &· &  ·\\
+    R..TAB.001 &· &· &· &· &· &· &· &· &· &· &· \\
     \hline 
-    R..TAB.002 &· &· &· &· &· &· &· &· &· &· &· &  ·\\
+    R..TAB.002 &· &· &· &· &· &· &· &· &· &· &· \\
     \hline
-    R..SHAREFOLDER.001 &Y&· &Y&· &· &· &Y&· &· &· &Y&  ·\\
+    R..SHAREFOLDER.001 &Y&· &Y&· &· &· &Y&· &· &· &Y\\
     \hline
-    R..SHAREFOLDER.002 &Y&· &Y&· &· &· &Y&· &· &· &Y&  ·\\
+    R..SHAREFOLDER.002 &Y&· &Y&· &· &· &Y&· &· &· &Y\\
     \hline
-    R..SHAREFOLDER.003 &Y&· &Y&· &· &· &Y&· &· &· &Y&  ·\\ 
+    R..SHAREFOLDER.003 &Y&· &Y&· &· &· &Y&· &· &· &Y\\ 
     \hline
-    R..SHAREFOLDER.004 &Y&· &Y&· &· &· &Y&· &· &· &Y&  ·\\ 
+    R..SHAREFOLDER.004 &Y&· &Y&· &· &· &Y&· &· &· &Y\\ 
     \hline
-    R..VERSION.001 &Y&· &· &· &· &· &· &· &· &· &· &Y \\
+    R..VERSION.001 &Y&· &· &· &· &· &· &· &· &· &· \\
     \hline
 \end{tabular}
 \note{表中的R..XXX等均指R.XYZ.CLOUDSTORAGE.XXX。第一行的1~12表示指MODULE.SERVER.1~12}
