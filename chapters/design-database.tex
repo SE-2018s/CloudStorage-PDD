@@ -12,11 +12,17 @@
 \section{逻辑设计}
 数据库设计应满足BCNF范式
 
-实体的逻辑关系图如下
+实体的逻辑关系图如图6.1所示。
 \begin{figure}
     \centering
-    \includegraphics[width=16cm]{ER.pdf}
-    \caption{ER关系图}\label{fig:noted-figure}
+    \includegraphics[width=16cm]{ER1.pdf}
+    \caption{ER1关系图}\label{fig:noted-figure}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=16cm]{ER2.pdf}
+    \caption{ER2关系图}\label{fig:noted-figure}
 \end{figure}
 
 \section{物理设计}
@@ -27,9 +33,11 @@
 
 \subsection{实体属性、类型、精度}
 \subsubsection{文件数据表设计}
+
+文件数据表设计如表6.1所示。
 \begin{table}[htbp]
 \centering
-\caption{文件数据表Files设计} \label{tab:file-database}
+\caption{文件数据表Files设计} \label{tab:files-database}
 \begin{tabular}{|c|c|c|c|c|}
     \hline
     字段名 & 类型 & 大小 & 说明 & 备注 \\
@@ -38,9 +46,13 @@
     \hline
     文件路径 & char & 512 & 文件在用户目录下路径 & \\
     \hline
-    文件模式 & char & 20 & 文件的信息(是否可写，可执行等)& \\
+    文件模式 & char & 20 & 文件的信息& \\
     \hline
-    用户ID & char & 64 & 该文件拥有者的ID & 外键，来自User表 \\
+    用户ID & char & 64 & 该文件拥有者的ID & 外键，来自Users表 \\
+    \hline
+    收藏夹ID & char & 64 & 该文件所在收藏夹 & 外键，来自BookMarks表 \\
+    \hline
+    压缩/解压ID & char & 64 & 解压或压缩该文件的程序 & 外键，来自Presses表 \\
     \hline
     字节数 & int & 1 & 文件大小 & \\
     \hline
@@ -51,6 +63,7 @@
 \end{table}
 
 \subsubsection{用户数据表设计}
+用户数据表设计如表6.2所示。
 \begin{table}[htbp]
 \centering
 \caption{用户数据表Users设计} \label{tab:user-database}
@@ -66,13 +79,12 @@
     \hline
     邮箱地址 & char & 64 & 用户的邮箱 & \\
     \hline
-    拥有的文件 & char & 512 & 该用户在云盘上所有的文件ID & \\
-    \hline
 \end{tabular}
 \note{用户数据表Users设计}
 \end{table}
 
 \subsubsection{链接数据表设计}
+链接数据表设计如表6.3所示。
 \begin{table}[htbp]
 \centering
 \caption{链接数据表Users设计} \label{tab:link-database}
@@ -92,6 +104,66 @@
     \hline
 \end{tabular}
 \note{链接数据表Links设计}
+\end{table}
+
+\subsubsection{收藏夹数据表设计}
+\begin{table}[htbp]
+\centering
+\caption{收藏夹数据表BookMarks设计} \label{tab:bookmarks-database}
+\begin{tabular}{|c|c|c|c|c|}
+    \hline
+    字段名 & 类型 & 大小 & 说明 & 备注 \\
+    \hline
+    收藏夹ID & char & 64 & 收藏夹的唯一标识符 & 主键\\
+    \hline
+    用户ID & char & 64 & 拥有该收藏夹的用户 & 外键，来自Users表\\
+    \hline
+    创建日期 & char & 128 & 创建该收藏夹时间 & \\
+    \hline
+\end{tabular}
+\note{收藏夹数据表BookMarks设计}
+\end{table}
+
+\subsubsection{举报审核数据表设计}
+\begin{table}[htbp]
+\centering
+\caption{举报数据表Reports设计} \label{tab:reports-database}
+\begin{tabular}{|c|c|c|c|c|}
+    \hline
+    字段名 & 类型 & 大小 & 说明 & 备注 \\
+    \hline
+    举报ID & char & 64 & 举报信息的唯一标识符 & 主键\\
+    \hline
+    用户ID & char & 64 & 提供该举报信息的用户 & 外键，来自Users表\\
+    \hline
+    文件ID & char & 64 & 举报的文件ID & 外键，来自Files表\\
+    \hline
+    举报类型 & int & 1 & 被举报文件的类型 & \\
+    \hline
+    举报内容 & char & 1024 & 举报的具体信息 & \\
+    \hline
+    举报附件 & bin & 2MB & 举报内容附件 & \\
+    \hline
+    审核状态 & int & 1 & 审核该举报信的进度 & \\
+    \hline
+\end{tabular}
+\note{举报审核数据表Reports设计}
+\end{table}
+
+\subsubsection{压缩解压数据表设计}
+\begin{table}[htbp]
+\centering
+\caption{压缩解压表Presses设计} \label{tab:presses-database}
+\begin{tabular}{|c|c|c|c|c|}
+    \hline
+    字段名 & 类型 & 大小 & 说明 & 备注 \\
+    \hline
+    算法ID & char & 64 & 压缩解压算法的唯一标识符 & 主键\\
+    \hline
+    程序路径 & char & 64 & 执行文件的路径 & \\
+    \hline
+\end{tabular}
+\note{压缩解压数据表Presses设计}
 \end{table}
 
 \section{安全性设计}
