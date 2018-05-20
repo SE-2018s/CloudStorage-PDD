@@ -289,11 +289,12 @@ URL：/api/getshare.do
 
 \section{内部接口}
 
-\subsection{MODULE.CLIENT.1: 通信模块}
+\subsection{MODULE.CLIENT(SERVER).1: 通信模块}
+
 \subsubsection{connection create\_connection()}
 说明：建立连接
 
-\subsection{MODULE.CLIENT.2: 登陆模块}
+\subsection{MODULE.CLIENT(SERVER).2: 登陆模块}
 
 \subsubsection{user\_login(connection,loginfo)}
 参数connection:浏览器和服务器间的连接
@@ -315,25 +316,57 @@ String password:密码
 
 \subsubsection{add\_tab(connection)}
 参数connection:浏览器和服务器间的连接
-\subsubsection{close\_tab(connection, tabinfo)}
-参数connection:浏览器和服务器间的连接
 参数tabinfo:已经打开的标签页信息
-
 \subsection{MODULE.CLIENT.4: 显示模块}
+
 \subsubsection{show(connection)}
 参数connection:浏览器和服务器间的连接
 
+\subsection{MODULE.CLIENT.5(SERVER.4)：传输模块}
+\subsubsection{upload(connection, file， filepath)}
+参数connection:浏览器和服务器间的连接
+参数file:要传输的文件
+参数filepath:云端文件路径
+\subsubsection{download(connection, filepath)}
+参数connection:浏览器和服务器间的连接
+参数filepath:云端文件路径
+
+\subsection{MODULE.SERVER.3：权限管理模块}
+\subsubsection{check\_right(operate, fielpath)}
+参数operate：操作
+参数filepath:云端文件路径
+返回：时候该权限合法
+
+
 \subsection{MODULE.SERVER.5: 分享管理模块}
-\subsubsection{create\_share(fileID, fetch\_password, due\_time}
-参数fileID：要分享的文件的ID
+\subsubsection{create\_share(file\_path, fetch\_password, due\_time}
+参数file\_path：要分享的文件的\_path
 参数fetch\_password：下载该资源需要的密码
 参数due\_time:链接失效日期
-\subsection{send\_share(shareInfo)}
+
+\subsection{send\_share(shareInfog's)}
 class shareInfo:
-    int owner\_id
+    int owner\_path
     str link\_url
     str link\_passward
     time due\_time
 
 \subsection{MODULE.SERVER.6: 收藏夹模块}
-\subsubsection{create\_bookmark(connection)}
+\subsubsection{create\_bookmark()}
+
+\subsubsection{add\_bookmark(bookmark\_path, file\_path)}
+参数file\_path：将要添加到收藏夹的文件
+参数bookmark\_path：收藏夹路径
+
+\subsection{delete\_bookmark(file\_path)}
+参数file\_path:要删除文件的路径
+
+\subsection{MODULE.SERVER.7: 文件管理模块}
+\subsubsection{insert\_file(file\_path, ceph\_obj)}
+参数file\_path:将要插入ceph模块的文件路径
+参数ceph\_obj:ceph的一个block对象
+
+\subsubsection{drop\_file(ceph\_obj, file\_obj)}
+参数ceph\_obj:ceph的一个block对象
+参数file\_obj:将要删除的该block里的文件
+ 
