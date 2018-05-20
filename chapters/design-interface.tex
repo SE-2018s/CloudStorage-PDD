@@ -6,4 +6,53 @@
 详细讲述不同的接口（查询状态、支付交易、获取回执等）
 
 \section{内部接口}
-内部模块/系统之间的交互的接口。
+
+\subsection{MODULE.CLIENT.1: 通信模块}
+\subsubsection{connection create_connection()}
+说明：建立连接
+
+\subsection{MODULE.CLIENT.2: 登陆模块}
+
+\subsubsection{user_login(connection,loginfo)}
+参数connection:浏览器和服务器间的连接
+参数loginfo：用户登录信息
+说明：用户登录账号
+class loginfo：
+String user_name:用户名
+String password:密码
+\subsubsection{user_register(connection, loginfo)}
+参数connection:浏览器和服务器间的连接
+参数loginfo：用户注册信息
+说明：用户注册账号
+\subsubsection{user_find_password(connection, user_name, user_email)}
+参数connection:浏览器和服务器间的连接
+参数user_name:用户名
+参数user_email:用户注册时的电子邮箱
+
+\subsection{MODULE.CLIENT.3: 标签页模块}
+
+\subsubsection{add_tab(connection)}
+参数connection:浏览器和服务器间的连接
+\subsubsection{close_tab(connection, tabinfo)}
+参数connection:浏览器和服务器间的连接
+参数tabinfo:已经打开的标签页信息
+
+\subsection{MODULE.CLIENT.4: 显示模块}
+\subsubsection{show(connection)}
+参数connection:浏览器和服务器间的连接
+
+\subsection{MODULE.SERVER.5: 分享管理模块}
+\subsubsection{create_share(fileID, fetch_password, due_time}
+参数fileID：要分享的文件的ID
+参数fetch_password：下载该资源需要的密码
+参数due_time:链接失效日期
+\subsection{send_share(shareInfo)}
+class shareInfo:
+    int owner_id
+    str link_url
+    str link_passward
+    time due_time
+
+\subsection{MODULE.SERVER.6: 收藏夹模块}
+\subsubsection{create_bookmark(connection)}
+\subsubsection{create_bookmark(connection)}
