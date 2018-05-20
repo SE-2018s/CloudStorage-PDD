@@ -1,20 +1,23 @@
 \chapter{数据库设计}
 \section{数据库环境说明}
-本系统的数据系统采用MySQL/PostgreSQL/Microsoft SQL Server数据库系统。
-
-其中xxx模块因为xxx而需要用到Hadoop架构。
+本系统的数据系统采用MySQL数据库系统。
 
 \section{数据库的命名规则}
-是否允许单词缩写，允许的单词缩写有哪些。
+只有标识符“ID”可以缩写，其他有意义的名词不允许缩写
 
-表名是单数还是复数。关联表如何命名。字符数限制等。
+表名统一用单数。命名最大字节数为100，关联表用该表"ID"作为外键
 
-字段是否带上前缀（如integer类型则加上i前缀等）。
+统一所有表无前缀
 
 \section{逻辑设计}
-是否需要满足某一种范式。
+数据库设计应满足BCNF范式
 
-画个实体的逻辑关系表/图在此处。
+实体的逻辑关系图如下
+\begin{figure}
+    \centering
+    \includegraphics[width=16cm]{ER.pdf}
+    \caption{ER关系图}\label{fig:noted-figure}
+\end{figure}
 
 \section{物理设计}
 \subsection{数据库产品}

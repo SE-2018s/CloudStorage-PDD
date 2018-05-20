@@ -1,10 +1,38 @@
 \chapter{数据结构设计}
-\section{逻辑结构设计}
-\subsection{用户管理系统数据结构设计}
-讲述本系统内需要什么数据结构。这指的是程序运行过程中维护的数据结构。只是举个例子，此处应和3.3一致。
-\subsection{客户端数据结构}
 
-\subsection{用户端数据结构}
+\section{逻辑结构设计}
+使用伪代码来表示数据结构的设计
+\subsection{文件数据结构}
+\begin{lstlisting}[language=Python]
+    class File:
+        str file_id
+        str file_name
+        str file_mode
+        str owner_name
+        int num_bytes
+        time last_updated
+\end{lstlisting}
+
+\subsection{用户信息数据结构}
+\begin{lstlisting}[language=Python]
+    class User:
+        str user_id
+        str name
+        str passward
+        str email
+        list files_own
+
+\end{lstlisting}
+\subsection{链接数据结构}
+\begin{lstlisting}[language=Python]
+    class Link:
+        str file_id
+        str owner_id
+        str link_url
+        str link_passward
+        time due_time
+
+\end{lstlisting}
 
 \section{物理结构设计}
 各数据结构无特殊物理结构要求。（如果有，比如说hadoop等，应当具体说明）
