@@ -5,19 +5,19 @@
 前台主要功能是：初始化界面的显示、关操作的请求（如输入用户名密码等）、用户的文件相关操作的请求（如选中文件并上传、下载、分享等操作）的控制信息的发送以及数据文件的发送、用户操作的结果显示等。
 
 后台主要功能是：处理用户的输入，判断其权限、其操作是否合法；对于相应的文件操作，进行相应的判断与处理，比如：对于上传以及分享的文件，进行内容审核处理；对文件进行存储冗余处理；并且将处理结果(包括操作的结果以及下载操作对应的数据文件的发送等)返回到客户端。
-
+   
 \section{处理流程}
 \subsection{总体流程}
 总体流程图如图3.1所示。总体上来说，客户端将用户的请求通过网络发送到服务器端，服务器端对该请求进行检查，审核等处理之后，再执行相关操作，并最终将操作的结果返回到客户端。
-\begin{figure}[!ht] 
+\begin{figure}[htbp] 
 \centering
 \includegraphics[width=7cm]{flow_overall.png} 
 \caption{总体流程图}\label{fig:noted-figure}
 \end{figure}
-
+ 
 \subsection{系统基本流程} 
 系统基本流程如图3.2所示。
-\begin{figure}[!ht] 
+\begin{figure}[htbp] 
 \centering
 \includegraphics[width=7cm]{flow_system.png}
 \caption{系统基本流程图}\label{fig:noted-figure}
@@ -26,17 +26,17 @@
 
 \subsection{客户端基本流程}
 客户端基本流程如图3.3所示。
-\begin{figure}[!ht] 
+\begin{figure}[h] 
 \centering
-\includegraphics[width=18cm]{flow_client.png}
+\includegraphics[width=15cm]{flow_client_new.png} 
 \caption{客户端基本流程图}\label{fig:noted-figure}
 \end{figure}
-
+ 
 \subsection{服务器端基本流程}
 服务器端基本流程如图3.4所示。
-\begin{figure}[!ht] 
+\begin{figure}[h] 
 \centering
-\includegraphics[width=18cm]{flow_server.png}
+\includegraphics[width=15cm]{flow_server_new.png}
 \caption{服务器端基本流程图}\label{fig:noted-figure}
 \end{figure} 
 
@@ -345,16 +345,62 @@
 服务端判断用户是否有管理权，若有则修改指令中的对应权限，并提示修改成功，否则，返回没有权限的错误信息
 
 客户端根据返回信息提示修改是否成功
+{
+\color{red}
+\subsection{功能24-开通会员/会员续费的具体流程}
+用户右键单击头像， 选择“开通会员”/"会员续费"选项， 在弹出的窗口中选择“开通时长”，“支付方式”，”邀请码“等必要信息，单击”确定“结束
 
+客户端将需要的支付信息发包给服务器端。
+
+服务器生成订单，并将订单以及生成的二维码发给客户端。在客户端付款后，服务器等待第三方支付软件的支付确认信息。如果 30 分钟内收到确认信息，服务器记录该用户的会员时长并返回开通成功信息；否则，返回支付失败信息。
+
+\subsection{功能25-搜索用户的具体流程}
+用户在搜索框中输入所要搜索的用户的用户名,并点击"搜索用户"选项
+
+客户端将用户名发包给服务器端。
+
+服务器检查数据库中是否存在该用户,以及该用户的隐私设置,并根据结果生成页面显示相关用户资料
+
+\subsection{功能26-添加好友的具体流程}
+用户在搜索框中输入所要添加的好友的用户名,并点击"添加好友"选项
+
+客户端将用户名发包给服务器端。
+
+服务器检查数据库中是否存在该用户,以及该用户的隐私设置,并在该用户登陆时进行提示。生成页面显示“已发送申请”返回给客户端
+
+\subsection{功能27-同意、拒绝申请、删除好友的具体流程}
+对于好友申请：
+
+用户可以在登陆的时候看到提示，并进行“同意”或“拒绝”选项的选择
+
+客户端将“同意”或“拒绝”打包发送给服务器端
+
+服务器接收后，如果是“拒绝”，则返回“拒绝”到申请者的客户端；如果是“同意”，则将双方用户名添加到各自的好友数据库中，并返回“已添加好友”提示
+
+对于删除好友：
+
+用户可以在好友列表中进行“删除好友”的操作
+
+客户端将信息打包发给服务器端
+
+服务器端接收后在双方的好友数据库中进行删除操作，并提示“已删除好友”的信息到客户端
+
+\subsection{功能28-个人隐私设置的具体流程}
+用户在客户端点击进入设置，在“个人隐私”目录里，选择可以将哪些信息公开。例如“外界可见资料”，“陌生人是否可通过用户名搜索到我”等等
+
+客服端将个人隐私设置发送到服务器
+
+服务器记录并返回设置成功
+}
 
 
 \section{功能结构设计}
-\subsection{整体结构}
-整体模块的结构如图3.5所示。整体结构由客户端的4个内部模块、1个外部模块，和服务器端的11个内部模块、1个外部模块组成。
+\subsection{整体结构} 
+整体模块的结构如图3.5所示。整体结构由客户端的6个内部模块、1个外部模块，和服务器端的12个内部模块、1个外部模块组成。
 
-\begin{figure}[!ht] 
+\begin{figure}[htbp] 
 \centering 
-\includegraphics[width=18cm]{module_overall.png} 
+\includegraphics[width=18cm]{module_overall_new.png} 
 \caption{整体结构模块图}\label{fig:noted-figure}
 \end{figure}
 
@@ -364,12 +410,17 @@
 负责标签页的创建与关闭操作的标签页模块，
 负责生成页面，显示内容，弹出错误提示信息的显示模块，
 负责上传文件、下载文件的传输模块，
-以及与这些模块通信、与服务器端模块通信的通信模块一共5个模块构成。
+{
+\color{red}
+负责好友管理的模块，
+负责会员注册与支付的模块，
+}
+以及与这些模块通信、与服务器端模块通信的通信模块一共7个模块构成。
 \begin{figure}[!h]  
 \centering 
-\includegraphics[width=8cm]{module_client.png} 
+\includegraphics[width=5cm]{module_client_new.png} 
 \caption{用户端模块结构图}\label{fig:noted-figure}
-\end{figure}
+\end{figure}   
 
 \subsubsection{MODULE.CLIENT.1:通信模块}
 将其他模块产生的输入打包为http请求，向服务器端发送，并将返回的内容传给该模块
@@ -389,14 +440,23 @@
 将用户对标签的操作打包传给通信模块，解析传回的结果
 
 \subsubsection{MODULE.CLIENT.4:显示模块}
-绘制页面内容，包括文件列表、功能按钮、错误信息提示框等。当其他模块完成了一次操作，则调用该模块进行显示
+绘制页面内容，包括文件列表、功能按钮、错误信息提示框等。当其他模块完成了一次操作，则调用该模块进行显示 
 
-\subsubsection{MODULE.CLIENT.5:传输模块}
+\subsubsection{MODULE.CLIENT.5:文件传输模块}
 负责文件的上传、下载的传输
 
+{
+\color{red}
 
+\subsubsection{MODULE.CLIENT.6:会员模块}
+负责会员的支付、续费、注册、优惠券等功能
 
+ 
+\subsubsection{MODULE.CLIENT.7:好友模块}
+负责用户搜索、好友管理、个人隐私设置等功能。
 
+其中，好友管理包括好友申请、同意、拒绝、删除等功能。
+}
 
 \subsection{服务器端结构}
 服务器端的模块结构如图3.6所示，
@@ -411,12 +471,15 @@
 负责压缩、解压缩的压缩模块，
 负责共享文件夹操作的共享文件夹模块，
 负责版本更新的版本管理模块，
+{\color{red}
+负责好友管理的模块，
+负责会员注册与支付的模块，}
 以及负责与这些模块通信，
-与客户端模块通信的通信模块，一共12个模块。
+与客户端模块通信的通信模块，一共13个模块。
 
 \begin{figure}[!h] 
 \centering   
-\includegraphics[width=16cm]{module_server.png}
+\includegraphics[width=16cm]{module_server_new.png}
 \caption{服务器端模块结构图}\label{fig:noted-figure}
 \end{figure}
 
@@ -464,7 +527,20 @@
 \subsubsection{MODULE.SERVER.11:共享文件夹模块}
 管理所有共享文件夹。对共享文件夹的操作先由本模块调用权限模块判断权限，然后调用文件管理模块进行正常的文件操作
 
+{
+\color{red}
+\subsubsection{MODULE.SERVER.12:会员模块}
+管理会员的注册、支付、续费、优惠券，以及加速等功能
 
+关键是生成订单、利用第三方接口生成支付二维码的操作
+\subsubsection{MODULE.SERVER.13:好友管理模块}
+负责用户搜索、好友管理、个人隐私设置等功能
+
+对于搜索的用户，检查是否存在该用户，根据其设置的隐私权限选择是否显示用户资料
+
+对于好友的管理，同意申请、删除好友都会增加、删除好友数据库中的相应数据
+}
+    
 
 
 
@@ -472,179 +548,197 @@
 
 \section{功能需求与程序代码的关系}
 这一小节分为功能需求与用户端代码的关系和功能需求与服务器端代码的关系两个部分。其中，与用户端代码的关系如表3.1，表3.2所示；与服务器端的代码的关系如表3.3，表3.4所示。
-\begin{table}[!ht]
+\begin{table}[htbp]
 \centering
 \caption{功能需求与程序代码的关系表1-用户端模块第1部分} \label{tab:requirement-module}
-\begin{tabular}{|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c||c|c|}
     \hline 
-    需求ID & MD.CL.1 & MD.CL.2 & MD.CL.3 & MD.CL.4 & MD.CL.5 \\
+    需求ID & M.C.1 & M.C.2 & M.C.3 & M.C.4 & M.C.5 &M.C.6 & M.C.7\\
     \hline 
-    R..USER.LOGIN.001 &· &· &· & Y  &· \\
+    R..USER.LOGIN.001 &· &· &· & Y  &· &M.C.6 & M.C.7\\
     \hline
-    R..USER.LOGIN.002 & Y & Y &Y  &·  &· \\
+    R..USER.LOGIN.002 & Y & Y &Y  &·  &· &M.C.6 & M.C.7\\
     \hline 
-    R..USER.LOGIN.003 & Y & Y & Y &·  &· \\
+    R..USER.LOGIN.003 & Y & Y & Y &·  &· &M.C.6 & M.C.7\\
     \hline
-    R..USER.LOGIN.004 & Y & Y & Y &·   &· \\
+    R..USER.LOGIN.004 & Y & Y & Y &·   &· &M.C.6 & M.C.7\\
     \hline
-    R..USER.LOGIN.005 &· &· &· & Y  &· \\
+    R..USER.LOGIN.005 &· &· &· & Y  &· &M.C.6 & M.C.7\\
     \hline
-    R..FILE.BASIC.001 & Y &· &· & Y  & Y \\
+    R..USER.MEMBERSHIP.001 &· &· &· & Y  &· &M.C.6 & M.C.7\\
     \hline
-    R..FILE.BASIC.002 & Y &· &· &  Y & Y \\
+    R..USER.MEMBERSHIP.002 & Y & Y &Y  &·  &· &M.C.6 & M.C.7\\
     \hline 
-    R..FILE.BASIC.003 & Y  &·  & · &Y   &· \\
+    R..USER.MEMBERSHIP.003 & Y & Y & Y &·  &· &M.C.6 & M.C.7\\
     \hline
-    R..FILE.BASIC.004 & Y  &·  & · &Y  &· \\
+    R..USER.SOCIAL.001 &· &· &· & Y  &· &M.C.6 & M.C.7\\
     \hline
-    R..FILE.BASIC.005 & Y  &·  & · &Y  &· \\
-    \hline
-    R..FILE.BASIC.006 & Y  &·  & · & Y  &· \\ 
-    \hline
-    R..FILE.BASIC.007 & Y  &·  & · & Y  &· \\
-    \hline
-    R..FILE.BASIC.008 & Y  &·  & · & Y  &· \\
-    \hline
-    R..FILE.BASIC.009 & Y  &·  & · & Y  &· \\ 
-    \hline
-    R..FILE.BASIC.010 &·  & · & Y & Y  &· \\ 
-    \hline
-    R..FILE.HIGH.001 & Y  &·  & · &Y  &· \\
-    \hline
-    R..FILE.HIGH.002 & Y  &·  & · & Y  &· \\
-    \hline
-    R..FILE.HIGH.003 & Y &· &· & Y  &· \\
-    \hline
-    R..FILE.HIGH.004 & Y &· &· &Y  &· \\
+    R..USER.SOCIAL.002 & Y & Y &Y  &·  &· &M.C.6 & M.C.7\\
     \hline 
-    R..FILE.HIGH.005 & Y &· &· & Y  &· \\
+    R..USER.SOCIAL.003 & Y & Y & Y &·  &· &M.C.6 & M.C.7\\
+    \hline
+    R..USER.SOCIAL.004 & Y & Y & Y &·   &· &M.C.6 & M.C.7\\
+    \hline
+    R..USER.SOCIAL.005 &· &· &· & Y  &· &M.C.6 & M.C.7\\
+    \hline
+    R..FILE.BASIC.001 & Y &· &· & Y  & Y &M.C.6 & M.C.7\\
+    \hline
+    R..FILE.BASIC.002 & Y &· &· &  Y & Y &M.C.6 & M.C.7\\
+    \hline 
+    R..FILE.BASIC.003 & Y  &·  & · &Y   &· &M.C.6 & M.C.7\\
+    \hline
+    R..FILE.BASIC.004 & Y  &·  & · &Y  &· &M.C.6 & M.C.7\\
+    \hline     
+    R..FILE.BASIC.005 & Y  &·  & · &Y  &· &M.C.6 & M.C.7\\
+    \hline
+    R..FILE.BASIC.006 & Y  &·  & · & Y  &· &M.C.6 & M.C.7\\ 
+    \hline
+    R..FILE.BASIC.007 & Y  &·  & · & Y  &· &M.C.6 & M.C.7\\
+    \hline
+    R..FILE.BASIC.008 & Y  &·  & · & Y  &· &M.C.6 & M.C.7\\
+    \hline
+    R..FILE.BASIC.009 & Y  &·  & · & Y  &· &M.C.6 & M.C.7\\ 
+    \hline
+    R..FILE.BASIC.010 &·  & · & Y & Y  &· &M.C.6 & M.C.7\\ 
+    \hline
+    R..FILE.BASIC.011 &·  & · & Y & Y  &· &M.C.6 & M.C.7\\ 
     \hline
 \end{tabular}
-\note{表中的R..XXX等均指R.XYZ.CLOUDSTORAGE.XXX。   MD.CL指MODULE.CLIENT}
+\note{表中的R..XXX等均指R.XYZ.CLOUDSTORAGE.XXX。   M.C指MODULE.CLIENT}
 \end{table}
 
-\begin{table}[!ht]
+\begin{table}[htbp]
 \centering
 \caption{功能需求与程序代码的关系表1-用户端模块第2部分} \label{tab:requirement-module}
-\begin{tabular}{|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c||c|c|}
     \hline 
-    需求ID & MD.CL.1 & MD.CL.2 & MD.CL.3 & MD.CL.4 & MD.CL.5 \\
+    需求ID & M.C.1 & M.C.2 & M.C.3 & M.C.4 & M.C.5 &M.C.6 & M.C.7\\
+    \hline  
+    R..FILE.HIGH.001 & Y  &·  & · &Y  &· &M.C.6 & M.C.7\\
+    \hline
+    R..FILE.HIGH.002 & Y  &·  & · & Y  &· &M.C.6 & M.C.7\\
+    \hline
+    R..FILE.HIGH.003 & Y &· &· & Y  &· &M.C.6 & M.C.7\\
+    \hline
+    R..FILE.HIGH.004 & Y &· &· &Y  &· &M.C.6 & M.C.7\\
     \hline 
-    R..FILE.HIGH.006 &Y  &· &· &   Y& ·\\
+    R..FILE.HIGH.005 & Y &· &· & Y  &· &M.C.6 & M.C.7\\
     \hline
-    R..FILE.HIGH.007 &Y  &·  &·  &  Y& ·\\
+    R..FILE.HIGH.006 &Y  &· &· &   Y& ·&M.C.6 & M.C.7\\
+    \hline
+    R..FILE.HIGH.007 &Y  &·  &·  &  Y& ·&M.C.6 & M.C.7\\
     \hline 
-    R..FILE.HIGH.008 &Y  &·  &·  &  Y& ·\\
+    R..FILE.HIGH.008 &Y  &·  &·  &  Y& ·&M.C.6 & M.C.7\\
     \hline
-    R..FILE.HIGH.009 &Y  &·  &·  &   Y& ·\\
+    R..FILE.HIGH.009 &Y  &·  &·  &   Y& ·&M.C.6 & M.C.7\\
     \hline
-    R..FILE.HIGH.010 &Y &· &· &   Y& ·\\
+    R..FILE.HIGH.010 &Y &· &· &   Y& ·&M.C.6 & M.C.7\\
     \hline
-    R..FILE.HIGH.011 &Y  &· &· &   Y&  ·\\
+    R..FILE.HIGH.011 &Y  &· &· &   Y&  ·&M.C.6 & M.C.7\\
     \hline
-    R..TAB.001 &·  &· &Y &   Y&  ·\\
+    R..TAB.001 &·  &· &Y &   Y&  ·&M.C.6 & M.C.7\\
     \hline 
-    R..TAB.002 &·   &Y  &·  &   Y& ·\\
+    R..TAB.002 &·   &Y  &·  &   Y& ·&M.C.6 & M.C.7\\
     \hline
-    R..SHAREFOLDER.001 &  Y &·  &·  &  Y& ·\\
+    R..SHAREFOLDER.001 &  Y &·  &·  &  Y& ·&M.C.6 & M.C.7\\
     \hline
-    R..SHAREFOLDER.002 &  Y &·  &·  &  Y& ·\\
+    R..SHAREFOLDER.002 &  Y &·  &·  &  Y& ·&M.C.6 & M.C.7\\
     \hline
-    R..SHAREFOLDER.003 &  Y &·  &·  &   Y& ·\\ 
+    R..SHAREFOLDER.003 &  Y &·  &·  &   Y& ·&M.C.6 & M.C.7\\ 
     \hline
-    R..SHAREFOLDER.004 &  Y &·  &·  &   Y& ·\\
+    R..SHAREFOLDER.004 &  Y &·  &·  &   Y& ·&M.C.6 & M.C.7\\
     \hline
-    R..VERSION.001 &  Y &·  &·  &   Y& ·\\
+    R..VERSION.001 &  Y &·  &·  &   Y& ·&M.C.6 & M.C.7\\
     \hline
 \end{tabular}
-\note{表中的R..XXX等均指R.XYZ.CLOUDSTORAGE.XXX。   MD.CL指MODULE.CLIENT}
+\note{表中的R..XXX等均指R.XYZ.CLOUDSTORAGE.XXX。   M.C指MODULE.CLIENT}
 \end{table}
  
-\begin{table}[!ht]
+\begin{table}[htbp]
 \centering
 \caption{功能需求与程序代码的关系表2-服务器端模块第1部分} \label{tab:requirement-module}
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
     \hline 
-    需求ID & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 \\    
+    需求ID & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 &12&13\\    
     \hline 
-    R..USER.LOGIN.001 &· &· &· &· &· &· &· &· &· &· &· \\
+    R..USER.LOGIN.001 &· &· &· &· &· &· &· &· &· &· &· &12&13\\
     \hline
-    R..USER.LOGIN.002 &Y&Y&· &· &· &· &· &· &· &· &· \\
+    R..USER.LOGIN.002 &Y&Y&· &· &· &· &· &· &· &· &· &12&13\\
     \hline 
-    R..USER.LOGIN.003 &Y&Y&· &· &· &· &· &· &· &· &· \\
+    R..USER.LOGIN.003 &Y&Y&· &· &· &· &· &· &· &· &· &12&13\\
     \hline
-    R..USER.LOGIN.004 &Y&Y&· &· &· &· &· &· &· &· &· \\
+    R..USER.LOGIN.004 &Y&Y&· &· &· &· &· &· &· &· &· &12&13\\
     \hline
-    R..USER.LOGIN.005 &· &· &· &· &· &· &· &· &· &· &· \\
+    R..USER.LOGIN.005 &· &· &· &· &· &· &· &· &· &· &· &12&13\\
     \hline
-    R..FILE.BASIC.001 &Y&· &Y&Y&· &· &Y&Y&· &· &· \\
+    R..FILE.BASIC.001 &Y&· &Y&Y&· &· &Y&Y&· &· &· &12&13\\
     \hline
-    R..FILE.BASIC.002 &Y&· &Y&Y&· &· &Y&Y&· &· &· \\
+    R..FILE.BASIC.002 &Y&· &Y&Y&· &· &Y&Y&· &· &· &12&13\\
     \hline 
-    R..FILE.BASIC.003 &Y&· &Y&· &· &· &Y&· &· &· &· \\
+    R..FILE.BASIC.003 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\
     \hline
-    R..FILE.BASIC.004 &Y&· &Y&· &· &· &Y&· &· &· &· \\
+    R..FILE.BASIC.004 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\
     \hline
-    R..FILE.BASIC.005 &Y&· &Y&· &· &· &Y&· &· &· &· \\
+    R..FILE.BASIC.005 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\
     \hline
-    R..FILE.BASIC.006 &Y&· &Y&· &· &· &Y&· &· &· &· \\ 
+    R..FILE.BASIC.006 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\ 
     \hline
-    R..FILE.BASIC.007 &Y&· &Y&· &· &· &Y&· &· &· &· \\
+    R..FILE.BASIC.007 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\
     \hline
-    R..FILE.BASIC.008 &Y&· &Y&· &· &· &Y&· &· &Y&· \\
+    R..FILE.BASIC.008 &Y&· &Y&· &· &· &Y&· &· &Y&· &12&13\\
     \hline
-    R..FILE.BASIC.009 &Y&· &Y&· &· &· &Y&· &· &Y&· \\ 
+    R..FILE.BASIC.009 &Y&· &Y&· &· &· &Y&· &· &Y&· &12&13\\ 
     \hline
-    R..FILE.BASIC.010 &· &· &· &· &· &· &· &· &· &· &· \\ 
+    R..FILE.BASIC.010 &· &· &· &· &· &· &· &· &· &· &· &12&13\\ 
     \hline
-    R..FILE.HIGH.001 &Y&· &Y&· &· &· &Y&· &Y&· &· \\
+    R..FILE.HIGH.001 &Y&· &Y&· &· &· &Y&· &Y&· &· &12&13\\
     \hline
-    R..FILE.HIGH.002 &Y&· &Y&· &· &Y&Y&· &· &· &· \\
+    R..FILE.HIGH.002 &Y&· &Y&· &· &Y&Y&· &· &· &· &12&13\\
     \hline
-    R..FILE.HIGH.003 &Y&· &Y&· &· &· &Y&· &· &· &· \\
+    R..FILE.HIGH.003 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\
     \hline
-    R..FILE.HIGH.004 &Y&· &Y&· &Y&· &Y&Y&· &· &· \\
+    R..FILE.HIGH.004 &Y&· &Y&· &Y&· &Y&Y&· &· &· &12&13\\
     \hline
-    R..FILE.HIGH.005 &Y&· &Y&· &· &· &Y&· &· &· &· \\
+    R..FILE.HIGH.005 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\
     \hline
 \end{tabular}
-\note{表中的R..XXX等均指R.XYZ.CLOUDSTORAGE.XXX。第一行的1~11表示指MODULE.SERVER.1~11}
+\note{表中的R..XXX等均指R.XYZ.CLOUDSTORAGE.XXX。第一行的1~13表示指MODULE.SERVER.1~13}
 \end{table}
 
-\begin{table}[!ht]
+\begin{table}[htbp]
 \centering
 \caption{功能需求与程序代码的关系表2-服务器端模块第2部分} \label{tab:requirement-module}
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
     \hline 
-    需求ID & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 \\    
+    需求ID & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 &12&13\\    
     \hline 
-    R..FILE.HIGH.006 &Y&· &Y&· &· &· &Y&· &· &· &· \\
+    R..FILE.HIGH.006 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\
     \hline
-    R..FILE.HIGH.007 &Y&· &Y&· &· &· &Y&· &· &· &· \\
+    R..FILE.HIGH.007 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\
     \hline 
-    R..FILE.HIGH.008 &Y&· &Y&· &· &· &Y&· &· &· &· \\
+    R..FILE.HIGH.008 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\
     \hline
-    R..FILE.HIGH.009 &Y&· &Y&· &· &· &Y&· &· &· &· \\
+    R..FILE.HIGH.009 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\
     \hline
-    R..FILE.HIGH.010 &Y&· &Y&· &· &· &Y&Y&· &· &· \\
+    R..FILE.HIGH.010 &Y&· &Y&· &· &· &Y&Y&· &· &· &12&13\\
     \hline
-    R..FILE.HIGH.011 &Y&· &Y&· &· &· &Y&Y&· &· &· \\
+    R..FILE.HIGH.011 &Y&· &Y&· &· &· &Y&Y&· &· &· &12&13\\
     \hline
-    R..TAB.001 &· &· &· &· &· &· &· &· &· &· &· \\
+    R..TAB.001 &· &· &· &· &· &· &· &· &· &· &· &12&13\\
     \hline 
-    R..TAB.002 &· &· &· &· &· &· &· &· &· &· &· \\
+    R..TAB.002 &· &· &· &· &· &· &· &· &· &· &· &12&13\\
     \hline
-    R..SHAREFOLDER.001 &Y&· &Y&· &· &· &Y&· &· &· &Y\\
+    R..SHAREFOLDER.001 &Y&· &Y&· &· &· &Y&· &· &· &Y&12&13\\
     \hline
-    R..SHAREFOLDER.002 &Y&· &Y&· &· &· &Y&· &· &· &Y\\
+    R..SHAREFOLDER.002 &Y&· &Y&· &· &· &Y&· &· &· &Y&12&13\\
     \hline
-    R..SHAREFOLDER.003 &Y&· &Y&· &· &· &Y&· &· &· &Y\\ 
+    R..SHAREFOLDER.003 &Y&· &Y&· &· &· &Y&· &· &· &Y&12&13\\ 
     \hline
-    R..SHAREFOLDER.004 &Y&· &Y&· &· &· &Y&· &· &· &Y\\ 
+    R..SHAREFOLDER.004 &Y&· &Y&· &· &· &Y&· &· &· &Y&12&13\\ 
     \hline
-    R..VERSION.001 &Y&· &· &· &· &· &· &· &· &· &· \\
+    R..VERSION.001 &Y&· &· &· &· &· &· &· &· &· &· &12&13\\
     \hline
 \end{tabular}
-\note{表中的R..XXX等均指R.XYZ.CLOUDSTORAGE.XXX。第一行的1~1表示指MODULE.SERVER.1~11}
+\note{表中的R..XXX等均指R.XYZ.CLOUDSTORAGE.XXX。第一行的1~13表示指MODULE.SERVER.1~13}
 \end{table}
  
