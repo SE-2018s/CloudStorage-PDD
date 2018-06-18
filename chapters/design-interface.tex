@@ -417,6 +417,42 @@ String password:密码
 参数filepath:云端文件路径
 
 说明:传输文件到客户端
+{
+\color{red}
+\subsection{MODULE.CLIENT.6:会员模块}
+\subsubsection{make\_vip(userid, date)}
+
+参数userid：用户id
+
+参数date：用户开通vip所至日期
+
+说明：用户userid开通或续费会员直至date
+
+\subsection{MODULE.CLIENT.7:好友模块}
+\subsubsection{add\_friend(userid1, userid2)}
+
+参数userid1：发起请求的userid
+
+参数userid2：想要添加的好友id
+
+说明：用户1发起添加用户2为好友的请求
+
+\subsubsection{delete\_friend(userid1, userid2)}
+
+参数userid1：发起请求的userid
+
+参数userid2：想要删除的好友id
+
+说明：用户1发起删除用户2为好友的请求
+
+\subsubsection{set\_privacy(userid, level)}
+
+参数userid：发起请求的userid
+
+参数level：隐私级别
+
+说明：用户修改自己隐私级别
+}
 \subsection{MODULE.SERVER.3：权限管理模块}
 \subsubsection{check\_right(filepath,userId}
 参数filepath::所要检查的文件路径.
@@ -551,3 +587,43 @@ class shareInfo:
 说明：返回所有该用户可见的共享文件夹列表
 
 
+{
+\color{red}
+\subsection{MODULE.SERVER.12:会员模块}
+
+\subsubsection{make\_vip(userid, date)}
+
+参数userid：用户id
+
+参数date：用户开通vip所至日期
+
+说明：用户userid开通或续费会员直至date
+
+\subsection{MODULE.SERVER.13:好友管理模块}
+
+\subsubsection{add\_friend(userid1, userid2)}
+
+参数userid1：发起请求的userid
+
+参数userid2：想要添加的好友id
+
+说明：用户1发起添加用户2为好友的请求
+
+\subsubsection{delete\_friend(userid1, userid2)}
+
+参数userid1：发起请求的userid
+
+参数userid2：想要删除的好友id
+
+说明：用户1发起删除用户2为好友的请求
+
+\subsubsection{set\_privacy(userid, level)}
+
+参数userid：发起请求的userid
+
+参数level：隐私级别
+
+说明：用户修改自己隐私级别
+
+}
+    
