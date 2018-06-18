@@ -548,60 +548,64 @@
 
 \section{功能需求与程序代码的关系}
 这一小节分为功能需求与用户端代码的关系和功能需求与服务器端代码的关系两个部分。其中，与用户端代码的关系如表3.1，表3.2所示；与服务器端的代码的关系如表3.3，表3.4所示。
-\begin{table}[htbp]
+{ 
+        \color{red}
+
+    \begin{table}[htbp]
+        \color{red}
 \centering
 \caption{功能需求与程序代码的关系表1-用户端模块第1部分} \label{tab:requirement-module}
 \begin{tabular}{|c|c|c|c|c|c||c|c|}
     \hline 
-    需求ID & M.C.1 & M.C.2 & M.C.3 & M.C.4 & M.C.5 &M.C.6 & M.C.7\\
+    需求ID & M.C.1 & M.C.2 & M.C.3 & M.C.4 & M.C.5 & M.C.6 & M.C.7\\
     \hline 
-    R..USER.LOGIN.001 &· &· &· & Y  &· &M.C.6 & M.C.7\\
+    R..USER.LOGIN.001 &· &· &· & Y  &· & ·  & ·\\
     \hline
-    R..USER.LOGIN.002 & Y & Y &Y  &·  &· &M.C.6 & M.C.7\\
+    R..USER.LOGIN.002 & Y & Y &Y  &·  &· & · & ·\\
     \hline 
-    R..USER.LOGIN.003 & Y & Y & Y &·  &· &M.C.6 & M.C.7\\
+    R..USER.LOGIN.003 & Y & Y & Y &·  &· & · & ·\\
     \hline
-    R..USER.LOGIN.004 & Y & Y & Y &·   &· &M.C.6 & M.C.7\\
+    R..USER.LOGIN.004 & Y & Y & Y &·   &· & · & ·\\
     \hline
-    R..USER.LOGIN.005 &· &· &· & Y  &· &M.C.6 & M.C.7\\
+    R..USER.LOGIN.005 &· &· &· & Y  &· & · & ·\\
     \hline
-    R..USER.MEMBERSHIP.001 &· &· &· & Y  &· &M.C.6 & M.C.7\\
+    R..USER.MEMBERSHIP.001 &Y &· &· & Y  &· &Y & ·\\
     \hline
-    R..USER.MEMBERSHIP.002 & Y & Y &Y  &·  &· &M.C.6 & M.C.7\\
+    R..USER.MEMBERSHIP.002 & Y & · &·  &Y  &· &Y & ·\\
+    \hline   
+    R..USER.MEMBERSHIP.003 & Y & · & · &Y  &· &Y & ·\\
+    \hline
+    R..USER.SOCIAL.001 &Y &· &· & Y  &Y & · & Y\\
+    \hline
+    R..USER.SOCIAL.002 & Y & · &·  &Y  &Y & · & Y\\
     \hline 
-    R..USER.MEMBERSHIP.003 & Y & Y & Y &·  &· &M.C.6 & M.C.7\\
+    R..USER.SOCIAL.003 & Y & · & · &Y  &Y & · & Y\\
     \hline
-    R..USER.SOCIAL.001 &· &· &· & Y  &· &M.C.6 & M.C.7\\
+    R..USER.SOCIAL.004 & Y & · & · &Y   &Y & · & Y\\
     \hline
-    R..USER.SOCIAL.002 & Y & Y &Y  &·  &· &M.C.6 & M.C.7\\
+    R..USER.SOCIAL.005 &Y &· &· & Y  &Y & · & Y\\
+    \hline
+    R..FILE.BASIC.001 & Y &· &· & Y  & Y & · & ·\\
+    \hline
+    R..FILE.BASIC.002 & Y &· &· &  Y & Y & · & ·\\
     \hline 
-    R..USER.SOCIAL.003 & Y & Y & Y &·  &· &M.C.6 & M.C.7\\
+    R..FILE.BASIC.003 & Y  &·  & · &Y   &· & · & ·\\
     \hline
-    R..USER.SOCIAL.004 & Y & Y & Y &·   &· &M.C.6 & M.C.7\\
-    \hline
-    R..USER.SOCIAL.005 &· &· &· & Y  &· &M.C.6 & M.C.7\\
-    \hline
-    R..FILE.BASIC.001 & Y &· &· & Y  & Y &M.C.6 & M.C.7\\
-    \hline
-    R..FILE.BASIC.002 & Y &· &· &  Y & Y &M.C.6 & M.C.7\\
-    \hline 
-    R..FILE.BASIC.003 & Y  &·  & · &Y   &· &M.C.6 & M.C.7\\
-    \hline
-    R..FILE.BASIC.004 & Y  &·  & · &Y  &· &M.C.6 & M.C.7\\
+    R..FILE.BASIC.004 & Y  &·  & · &Y  &· & · & ·\\
     \hline     
-    R..FILE.BASIC.005 & Y  &·  & · &Y  &· &M.C.6 & M.C.7\\
+    R..FILE.BASIC.005 & Y  &·  & · &Y  &· & · & ·\\
     \hline
-    R..FILE.BASIC.006 & Y  &·  & · & Y  &· &M.C.6 & M.C.7\\ 
+    R..FILE.BASIC.006 & Y  &·  & · & Y  &· & · & ·\\ 
     \hline
-    R..FILE.BASIC.007 & Y  &·  & · & Y  &· &M.C.6 & M.C.7\\
+    R..FILE.BASIC.007 & Y  &·  & · & Y  &· & · & ·\\
     \hline
-    R..FILE.BASIC.008 & Y  &·  & · & Y  &· &M.C.6 & M.C.7\\
+    R..FILE.BASIC.008 & Y  &·  & · & Y  &· & · & ·\\
     \hline
-    R..FILE.BASIC.009 & Y  &·  & · & Y  &· &M.C.6 & M.C.7\\ 
+    R..FILE.BASIC.009 & Y  &·  & · & Y  &· & · & ·\\ 
     \hline
-    R..FILE.BASIC.010 &·  & · & Y & Y  &· &M.C.6 & M.C.7\\ 
+    R..FILE.BASIC.010 &·  & · & Y & Y  &· & · & ·\\ 
     \hline
-    R..FILE.BASIC.011 &·  & · & Y & Y  &· &M.C.6 & M.C.7\\ 
+    R..FILE.BASIC.011 &Y  & · & · & Y  &Y & Y & ·\\ 
     \hline
 \end{tabular}
 \note{表中的R..XXX等均指R.XYZ.CLOUDSTORAGE.XXX。   M.C指MODULE.CLIENT}
@@ -609,136 +613,160 @@
 
 \begin{table}[htbp]
 \centering
+        \color{red}
+
 \caption{功能需求与程序代码的关系表1-用户端模块第2部分} \label{tab:requirement-module}
 \begin{tabular}{|c|c|c|c|c|c||c|c|}
     \hline 
-    需求ID & M.C.1 & M.C.2 & M.C.3 & M.C.4 & M.C.5 &M.C.6 & M.C.7\\
+    需求ID & M.C.1 & M.C.2 & M.C.3 & M.C.4 & M.C.5 & M.C.6 & M.C.7\\
     \hline  
-    R..FILE.HIGH.001 & Y  &·  & · &Y  &· &M.C.6 & M.C.7\\
+    R..FILE.HIGH.001 & Y  &·  & · &Y  &· & · & ·\\
     \hline
-    R..FILE.HIGH.002 & Y  &·  & · & Y  &· &M.C.6 & M.C.7\\
+    R..FILE.HIGH.002 & Y  &·  & · & Y  &· & · & ·\\
     \hline
-    R..FILE.HIGH.003 & Y &· &· & Y  &· &M.C.6 & M.C.7\\
+    R..FILE.HIGH.003 & Y &· &· & Y  &· & · & ·\\
     \hline
-    R..FILE.HIGH.004 & Y &· &· &Y  &· &M.C.6 & M.C.7\\
+    R..FILE.HIGH.004 & Y &· &· &Y  &· & · & ·\\
     \hline 
-    R..FILE.HIGH.005 & Y &· &· & Y  &· &M.C.6 & M.C.7\\
+    R..FILE.HIGH.005 & Y &· &· & Y  &· & · & ·\\
     \hline
-    R..FILE.HIGH.006 &Y  &· &· &   Y& ·&M.C.6 & M.C.7\\
+    R..FILE.HIGH.006 &Y  &· &· &   Y& ·& · & ·\\
     \hline
-    R..FILE.HIGH.007 &Y  &·  &·  &  Y& ·&M.C.6 & M.C.7\\
+    R..FILE.HIGH.007 &Y  &·  &·  &  Y& ·& · & ·\\
     \hline 
-    R..FILE.HIGH.008 &Y  &·  &·  &  Y& ·&M.C.6 & M.C.7\\
+    R..FILE.HIGH.008 &Y  &·  &·  &  Y& ·& · & ·\\
     \hline
-    R..FILE.HIGH.009 &Y  &·  &·  &   Y& ·&M.C.6 & M.C.7\\
+    R..FILE.HIGH.009 &Y  &·  &·  &   Y& ·& · & ·\\
     \hline
-    R..FILE.HIGH.010 &Y &· &· &   Y& ·&M.C.6 & M.C.7\\
+    R..FILE.HIGH.010 &Y &· &· &   Y& ·& · & ·\\
     \hline
-    R..FILE.HIGH.011 &Y  &· &· &   Y&  ·&M.C.6 & M.C.7\\
+    R..FILE.HIGH.011 &Y  &· &· &   Y&  ·& · & ·\\
     \hline
-    R..TAB.001 &·  &· &Y &   Y&  ·&M.C.6 & M.C.7\\
+    R..TAB.001 &·  &· &Y &   Y&  ·& · & ·\\
     \hline 
-    R..TAB.002 &·   &Y  &·  &   Y& ·&M.C.6 & M.C.7\\
+    R..TAB.002 &·   &Y  &·  &   Y& ·& · & ·\\
     \hline
-    R..SHAREFOLDER.001 &  Y &·  &·  &  Y& ·&M.C.6 & M.C.7\\
+    R..SHAREFOLDER.001 &  Y &·  &·  &  Y& ·& · & ·\\
     \hline
-    R..SHAREFOLDER.002 &  Y &·  &·  &  Y& ·&M.C.6 & M.C.7\\
+    R..SHAREFOLDER.002 &  Y &·  &·  &  Y& ·& · & ·\\
     \hline
-    R..SHAREFOLDER.003 &  Y &·  &·  &   Y& ·&M.C.6 & M.C.7\\ 
+    R..SHAREFOLDER.003 &  Y &·  &·  &   Y& ·& · & ·\\ 
     \hline
-    R..SHAREFOLDER.004 &  Y &·  &·  &   Y& ·&M.C.6 & M.C.7\\
+    R..SHAREFOLDER.004 &  Y &·  &·  &   Y& ·& · & ·\\
     \hline
-    R..VERSION.001 &  Y &·  &·  &   Y& ·&M.C.6 & M.C.7\\
+    R..VERSION.001 &  Y &·  &·  &   Y& ·& · & ·\\
     \hline
 \end{tabular}
 \note{表中的R..XXX等均指R.XYZ.CLOUDSTORAGE.XXX。   M.C指MODULE.CLIENT}
 \end{table}
  
 \begin{table}[htbp]
+        \color{red}
 \centering
 \caption{功能需求与程序代码的关系表2-服务器端模块第1部分} \label{tab:requirement-module}
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
     \hline 
-    需求ID & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 &12&13\\    
+    需求ID & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12& 13\\    
     \hline 
-    R..USER.LOGIN.001 &· &· &· &· &· &· &· &· &· &· &· &12&13\\
+    R..USER.LOGIN.001 &· &· &· &· &· &· &· &· &· &·  &· &·&·\\
     \hline
-    R..USER.LOGIN.002 &Y&Y&· &· &· &· &· &· &· &· &· &12&13\\
+    R..USER.LOGIN.002 &Y&Y&· &· &· &· &· &· &· &· &· &·&·\\ 
     \hline 
-    R..USER.LOGIN.003 &Y&Y&· &· &· &· &· &· &· &· &· &12&13\\
+    R..USER.LOGIN.003 &Y&Y&· &· &· &· &· &· &· &· &· &·&·\\
     \hline
-    R..USER.LOGIN.004 &Y&Y&· &· &· &· &· &· &· &· &· &12&13\\
+    R..USER.LOGIN.004 &Y&Y&· &· &· &· &· &· &· &· &· &·&·\\
     \hline
-    R..USER.LOGIN.005 &· &· &· &· &· &· &· &· &· &· &· &12&13\\
+    R..USER.LOGIN.005 &· &· &· &· &· &· &· &· &· &· &· &·&·\\
     \hline
-    R..FILE.BASIC.001 &Y&· &Y&Y&· &· &Y&Y&· &· &· &12&13\\
+    R..USER.MEMBERSHIP.001 &· &· &· &· &· &· &· &· &· &· &· &Y&·\\
     \hline
-    R..FILE.BASIC.002 &Y&· &Y&Y&· &· &Y&Y&· &· &· &12&13\\
+    R..USER.MEMBERSHIP.002 &Y&Y&· &· &· &· &· &· &· &· &· &Y&·\\ 
     \hline 
-    R..FILE.BASIC.003 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\
+    R..USER.MEMBERSHIP.003 &Y&Y&· &· &· &· &· &· &· &· &· &Y&·\\
     \hline
-    R..FILE.BASIC.004 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\
+    R..USER.SOCIAL.001 &· &· &· &· &· &· &· &· &· &· &· &·&Y\\
     \hline
-    R..FILE.BASIC.005 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\
+    R..USER.SOCIAL.002 &Y&Y&· &· &· &· &· &· &· &· &· &·&Y\\ 
+    \hline 
+    R..USER.SOCIAL.003 &Y&Y&· &· &· &· &· &· &· &· &· &·&Y\\
     \hline
-    R..FILE.BASIC.006 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\ 
+    R..USER.SOCIAL.004 &Y&Y&· &· &· &· &· &· &· &· &· &·&Y\\
     \hline
-    R..FILE.BASIC.007 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\
+    R..USER.SOCIAL.005 &· &· &· &· &· &· &· &· &· &· &· &·&Y\\
     \hline
-    R..FILE.BASIC.008 &Y&· &Y&· &· &· &Y&· &· &Y&· &12&13\\
+    R..FILE.BASIC.001 &Y&· &Y&Y&· &· &Y&Y&· &· &· &·&·\\
     \hline
-    R..FILE.BASIC.009 &Y&· &Y&· &· &· &Y&· &· &Y&· &12&13\\ 
+    R..FILE.BASIC.002 &Y&· &Y&Y&· &· &Y&Y&· &· &· &·&·\\
+    \hline  
+    R..FILE.BASIC.003 &Y&· &Y&· &· &· &Y&· &· &· &· &·&·\\
     \hline
-    R..FILE.BASIC.010 &· &· &· &· &· &· &· &· &· &· &· &12&13\\ 
+    R..FILE.BASIC.004 &Y&· &Y&· &· &· &Y&· &· &· &· &·&·\\
     \hline
-    R..FILE.HIGH.001 &Y&· &Y&· &· &· &Y&· &Y&· &· &12&13\\
+    R..FILE.BASIC.005 &Y&· &Y&· &· &· &Y&· &· &· &· &·&·\\
     \hline
-    R..FILE.HIGH.002 &Y&· &Y&· &· &Y&Y&· &· &· &· &12&13\\
+    R..FILE.BASIC.006 &Y&· &Y&· &· &· &Y&· &· &· &· &·&·\\ 
     \hline
-    R..FILE.HIGH.003 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\
+    R..FILE.BASIC.007 &Y&· &Y&· &· &· &Y&· &· &· &· &·&·\\
     \hline
-    R..FILE.HIGH.004 &Y&· &Y&· &Y&· &Y&Y&· &· &· &12&13\\
+    R..FILE.BASIC.008 &Y&· &Y&· &· &· &Y&· &· &Y&· &·&·\\
     \hline
-    R..FILE.HIGH.005 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\
+    R..FILE.BASIC.009 &Y&· &Y&· &· &· &Y&· &· &Y&· &·&·\\ 
     \hline
+    R..FILE.BASIC.010 &· &· &· &· &· &· &· &· &· &· &· &·&·\\ 
+    \hline
+    R..FILE.BASIC.011 &Y &· &· &· &· &· &· &· &· &· &· &Y&·\\ 
+    \hline
+
 \end{tabular}
-\note{表中的R..XXX等均指R.XYZ.CLOUDSTORAGE.XXX。第一行的1~13表示指MODULE.SERVER.1~13}
+\note{表中的R..XXX等均指R.XYZ.CLOUDSTORAGE.XXX。第一行的1-13表示指MODULE.SERVER.1-13}
 \end{table}
 
 \begin{table}[htbp]
+        \color{red}
 \centering
 \caption{功能需求与程序代码的关系表2-服务器端模块第2部分} \label{tab:requirement-module}
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
     \hline 
-    需求ID & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 &12&13\\    
+    需求ID & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12& 13\\    
     \hline 
-    R..FILE.HIGH.006 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\
+    R..FILE.HIGH.001 &Y&· &Y&· &· &· &Y&· &Y&· &· &·&·\\
     \hline
-    R..FILE.HIGH.007 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\
+    R..FILE.HIGH.002 &Y&· &Y&· &· &Y&Y&· &· &· &· &·&·\\
+    \hline
+    R..FILE.HIGH.003 &Y&· &Y&· &· &· &Y&· &· &· &· &·&·\\
+    \hline
+    R..FILE.HIGH.004 &Y&· &Y&· &Y&· &Y&Y&· &· &· &·&·\\
+    \hline
+    R..FILE.HIGH.005 &Y&· &Y&· &· &· &Y&· &· &· &· &·&·\\
+    \hline
+    R..FILE.HIGH.006 &Y&· &Y&· &· &· &Y&· &· &· &· &·&·\\
+    \hline
+    R..FILE.HIGH.007 &Y&· &Y&· &· &· &Y&· &· &· &· &·&·\\
     \hline 
-    R..FILE.HIGH.008 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\
+    R..FILE.HIGH.008 &Y&· &Y&· &· &· &Y&· &· &· &· &·&·\\
     \hline
-    R..FILE.HIGH.009 &Y&· &Y&· &· &· &Y&· &· &· &· &12&13\\
+    R..FILE.HIGH.009 &Y&· &Y&· &· &· &Y&· &· &· &· &·&·\\
     \hline
-    R..FILE.HIGH.010 &Y&· &Y&· &· &· &Y&Y&· &· &· &12&13\\
+    R..FILE.HIGH.010 &Y&· &Y&· &· &· &Y&Y&· &· &· &·&·\\
     \hline
-    R..FILE.HIGH.011 &Y&· &Y&· &· &· &Y&Y&· &· &· &12&13\\
+    R..FILE.HIGH.011 &Y&· &Y&· &· &· &Y&Y&· &· &· &·&·\\
     \hline
-    R..TAB.001 &· &· &· &· &· &· &· &· &· &· &· &12&13\\
+    R..TAB.001 &· &· &· &· &· &· &· &· &· &· &· &·&·\\
     \hline 
-    R..TAB.002 &· &· &· &· &· &· &· &· &· &· &· &12&13\\
+    R..TAB.002 &· &· &· &· &· &· &· &· &· &· &· &·&·\\
     \hline
-    R..SHAREFOLDER.001 &Y&· &Y&· &· &· &Y&· &· &· &Y&12&13\\
+    R..SHAREFOLDER.001 &Y&· &Y&· &· &· &Y&· &· &· &Y&·&·\\
     \hline
-    R..SHAREFOLDER.002 &Y&· &Y&· &· &· &Y&· &· &· &Y&12&13\\
+    R..SHAREFOLDER.002 &Y&· &Y&· &· &· &Y&· &· &· &Y&·&·\\
     \hline
-    R..SHAREFOLDER.003 &Y&· &Y&· &· &· &Y&· &· &· &Y&12&13\\ 
+    R..SHAREFOLDER.003 &Y&· &Y&· &· &· &Y&· &· &· &Y&·&·\\ 
     \hline
-    R..SHAREFOLDER.004 &Y&· &Y&· &· &· &Y&· &· &· &Y&12&13\\ 
+    R..SHAREFOLDER.004 &Y&· &Y&· &· &· &Y&· &· &· &Y&·&·\\ 
     \hline
-    R..VERSION.001 &Y&· &· &· &· &· &· &· &· &· &· &12&13\\
+    R..VERSION.001 &Y&· &· &· &· &· &· &· &· &· &· &·&·\\
     \hline
+    
 \end{tabular}
-\note{表中的R..XXX等均指R.XYZ.CLOUDSTORAGE.XXX。第一行的1~13表示指MODULE.SERVER.1~13}
+\note{表中的R..XXX等均指R.XYZ.CLOUDSTORAGE.XXX。第一行的1-13表示指MODULE.SERVER.1-13}
 \end{table}
- 
+} 
