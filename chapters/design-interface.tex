@@ -286,6 +286,72 @@ URL：/api/getshare.do
 
 返回值:bool类型,表示是否成功.并返回显示的页面
 
+{
+\color{red}
+
+\subsubsection{好友列表}
+URL：/api/friend\_list
+
+请求类型：GET
+
+参数：
+
+• cookie:无需用户手动输入
+
+返回值：当前用户的所有好友
+
+\subsubsection{查找好友}
+URL：/api/searchuser
+
+请求类型：GET
+
+参数：
+
+• type:key的类型
+
+• key:查找的关键字
+
+• cookie:无需用户手动输入
+
+返回值:精确匹配的用户结果
+
+\subsubsection{添加好友}
+URL：/api/add\_friend
+
+请求类型：POST
+
+参数：
+
+• id:好友ID
+
+• cookie:无需用户手动输入
+
+返回值：是否成功发起添加好友
+
+\subsubsection{删除好友}
+URL：/api/delete\_friend
+
+请求类型：POST
+
+参数：
+
+• id:好友ID
+
+• cookie:无需用户手动输入
+
+\subsubsection{开通、续费会员}
+URL：/api/make\_vip
+
+请求类型：POST
+
+参数：
+
+• time:开通vip的时长
+
+• cookie:无需用户手动输入
+
+}
+
 
 \section{内部接口}
 
